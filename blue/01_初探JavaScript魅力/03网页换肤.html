@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style1.css" id="skin">
+</head>
+<body>
+    <input type="button" value="皮肤1" id="btn1">
+    <input type="button" value="皮肤2" id="btn2">
+    <script>
+    //任何标签都可以加id，任何标签的任何属性都可以被修改
+    var oBtn1 = document.getElementById("btn1");
+    var oBtn2 = document.getElementById("btn2");
+    var oSkin = document.getElementById("skin");
+
+    oBtn1.onclick = function(){
+        changeSkin("css/style2.css");
+    };
+    oBtn2.onclick = function(){
+        changeSkin("css/style1.css");
+    };
+    
+    function changeSkin(link){
+        oSkin.href = link;
+    }
+    </script>
+</body>
+</html>

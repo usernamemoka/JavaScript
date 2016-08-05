@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    div{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+
+    </style>
+</head>
+<body>
+    <input type="button" value="变红" id="btn1">
+    <input type="button" value="变绿" id="btn2">
+    <input type="button" value="变黑" id="btn3">
+    <div id="div1"></div>
+    <script>
+    //利用传参优化代码
+    var oBtn1 = document.getElementById("btn1");
+    var oBtn2 = document.getElementById("btn2");
+    var oBtn3 = document.getElementById("btn3");
+    var oDiv = document.getElementById("div1");
+    oBtn1.onclick = function(){
+        changeColor("red");
+    };
+    oBtn2.onclick = function(){
+        changeColor("green");
+    };
+    oBtn3.onclick = function(){
+        changeColor("black");
+    };
+    function changeColor(color){
+        oDiv.style.backgroundColor = color;
+    }
+    </script>
+</body>
+</html>

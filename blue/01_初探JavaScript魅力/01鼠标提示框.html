@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn1">
+    <div id="div1">第一个JavaScript</div>
+    <script>
+    //ID也是可以直接在JS中拿来用的，只不过是不兼容而已
+    btn1.onmouseover = function(){
+        div1.style.display = "block";
+    };
+    btn1.onmouseout = function(){
+        div1.style.display = "none";
+    };
+    </script>
+</body>
+</html>

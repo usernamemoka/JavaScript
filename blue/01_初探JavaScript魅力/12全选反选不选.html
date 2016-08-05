@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box1">
+        
+    </div>
+    <div id="box1">
+        <input type="button" value="全选">
+        <input type="button" value="反选">
+        <input type="button" value="不选">
+    </div>
+    <div id="box2">
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+    </div>
+    <script>
+        var oBox1 = document.getElementById("box1");
+        var aCh1 = oBox1.getElementsByTagName("input");
+        var oBox2 = document.getElementById("box2");
+        var aCh2 = oBox2.getElementsByTagName("input");
+
+        aCh1[0].onclick = function(){
+            for(var i = 0;i < aCh2.length;i ++){
+                aCh2[i].checked = true;
+            }
+        };
+        aCh1[1].onclick = function(){
+            //console.log(typeof aCh2[0].checked);
+            for(var i = 0;i < aCh2.length;i ++){
+                if(aCh2[i].checked == false){//boolean型
+                    aCh2[i].checked = true;
+                }
+                else{
+                    aCh2[i].checked = false;
+                }
+            }
+        };
+        aCh1[2].onclick = function(){
+            for(var i = 0;i < aCh2.length;i ++){
+                aCh2[i].checked = false;
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #wrap div{
+            width: 150px;
+            height: 150px;
+            border: 1px solid red;
+            display: none;
+        }
+        #wrap .on{
+            background-color: red;
+        }
+        #wrap .active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input class="on" type="button" value="教育">
+        <input type="button" value="出国">
+        <input type="button" value="旅游">
+        <div class="active">教育...</div>
+        <div>出国...</div>
+        <div>旅游...</div>
+    </div>
+    <script>
+        //通过html加进去的属性浏览器不认，通过JS加进去浏览器认
+        var oWrap = document.getElementById("wrap");
+        var aInput = oWrap.getElementsByTagName("input");
+        var aDiv = oWrap.getElementsByTagName("div");
+
+        for(var i = 0;i < aInput.length;i ++){
+            aInput[i].index = i;//注意位置
+            aInput[i].onclick = function(){
+                for(var i = 0;i < aInput.length;i ++){
+                    aInput[i].className = "";
+                    aDiv[i].className = "";
+                }
+                this.className = "on";
+                aDiv[this.index].className = "active";
+            };
+        }
+
+    </script>
+</body>
+</html>

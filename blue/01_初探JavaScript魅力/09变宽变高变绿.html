@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    div{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+
+    </style>
+</head>
+<body>
+    <input type="button" value="变宽" id="btn1">
+    <input type="button" value="变高" id="btn2">
+    <input type="button" value="变绿" id="btn3">
+    <div id="div1"></div>
+    <script>
+    //oDiv.style.name样式中并没有一个东西叫name
+    //利用传参oDiv.style[name] = value;
+    var oBtn1 = document.getElementById("btn1");
+    var oBtn2 = document.getElementById("btn2");
+    var oBtn3 = document.getElementById("btn3");
+    var oDiv = document.getElementById("div1");
+    oBtn1.onclick = function(){
+        changeStyle("width","200px");//这里是"width"字符串而不是width变量，因为没有定义width变量
+    };
+    oBtn2.onclick = function(){
+        changeStyle("height","200px");
+    };
+    oBtn3.onclick = function(){
+        changeStyle("backgroundColor","green");
+    };
+    function changeStyle(name,value){
+        oDiv.style[name] = value;
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1">
+    <input type="button" value="改文字" id="btn1">
+    <script>
+    //html中怎么写，JS中就怎么写
+    var oTxt = document.getElementById("txt1");
+    var oBtn = document.getElementById("btn1");
+
+    oBtn.onclick = function(){
+        //oTxt.value = "my name is xxx";
+        //oTxt.title = "my name is xxx";
+        oTxt["value"] = "my name is xxx";//第二种办法，但凡用.的地方都能用[""]代替
+    };
+    </script>
+</body>
+</html>
