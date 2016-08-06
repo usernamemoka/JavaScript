@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    body{
+        background-color: #333;
+        text-align: center;
+        font-size: 40px;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <img src="images/0.png" alt="">
+    <img src="images/0.png" alt="">&nbsp;:&nbsp;<img src="images/0.png" alt="">
+    <img src="images/0.png" alt="">&nbsp;:&nbsp;<img src="images/0.png" alt="">
+    <img src="images/0.png" alt="">
+    <script>
+    //获取时间
+    //字符串连接，空位补零
+    //str[i]低版本ie不兼容
+    //定时器
+    function toNum(num){
+        if(num < 10){
+            return "0" + num;
+        }
+        else{
+            return "" + num;
+        }
+    }
+    var aImg = document.getElementsByTagName("img");
+
+    toChange();
+    function toChange(){
+        var oDate = new Date();
+        var oShi = oDate.getHours();
+        var oFen = oDate.getMinutes();
+        var oMiao = oDate.getSeconds();
+    
+        var str = "" + toNum(oShi) + toNum(oFen) + toNum(oMiao);
+
+        for(var i = 0 ; i < aImg.length; i ++){
+            aImg[i].src = "images/" + str.charAt(i) + ".png";
+        }
+    }
+    setInterval(toChange,1000);
+    </script>    
+</body>
+</html>

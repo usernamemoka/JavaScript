@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        li{
+            height: 20px;
+        }
+        .active{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        var aLi = document.getElementsByTagName("li");
+        for(var i = 0;i < aLi.length;i ++){
+            if(i % 2 == 0){
+                aLi[i].style.backgroundColor = "red";
+            }
+            else{
+                aLi[i].style.backgroundColor = "";
+            }
+        }
+    </script>
+</body>
+</html>

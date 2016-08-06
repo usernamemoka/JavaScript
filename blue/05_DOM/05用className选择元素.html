@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul1">
+        <li class="aaa">rfdsfsd</li>
+        <li>rfdsfsd</li>
+        <li class="aaa">rfdsfsd</li>
+        <li>rfdsfsd</li>
+        <li class="aaa">rfdsfsd</li>
+        <li class="aaa">rfdsfsd</li>
+    </ul>
+    <script>
+    //封装getByClass
+    function getByClass(obj,sClass){
+        var aEle = obj.getElementsByTagName("*");
+        var result = [];
+        for(var i = 0 ;i < aEle.length; i ++){
+            if(aEle[i].className == sClass){
+                result.push(aEle[i]);
+            }
+        }
+        return result;
+    }
+
+    var oUl = document.getElementById("ul1");
+    var aLi = getByClass(oUl,"aaa");
+
+    for(var i = 0 ;i < aLi.length;i ++){
+        aLi[i].style.backgroundColor = "red";
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>fdsf</li>
+        <li>fdsf</li>
+        <li>fdsf</li>
+        <li>fdsf</li>
+    </ul>
+    <script>
+        
+        var oUl = document.getElementsByTagName("ul")[0];
+
+        //ie6-8  >>  firstChild
+        if(oUl.firstElementChild){
+            oUl.firstElementChild.style.backgroundColor = "red";
+        }
+        else{
+            oUl.firstChild.style.backgroundColor = "red";
+        }
+         
+    </script>
+</body>
+</html>

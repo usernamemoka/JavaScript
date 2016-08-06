@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #div1{
+        width: 800px;
+        height: 150px;
+        margin: 50px auto 0;
+        position: relative;
+        background-color: red;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    ul{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    li{
+        list-style-type: none;
+        width: 200px;
+        float: left;
+        overflow: hidden;
+    }
+
+    .btnwrap{
+        margin-top: 20px;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="btnwrap">
+        <a href="javascript:;" id="left">Left</a>
+        <a href="javascript:;" id="right">Right</a>
+    </div>
+    <div id="div1">
+        <ul>
+            <li>
+                <img src="./images/move/a.png" alt="">
+            </li>
+            <li>
+                <img src="./images/move/b.png" alt="">
+            </li>
+            <li>
+                <img src="./images/move/c.png" alt="">
+            </li>
+            <li>
+                <img src="./images/move/d.png" alt="">
+            </li>
+        </ul>
+    </div>
+    <script>
+        var oDiv = document.getElementById("div1");
+        var oUl = oDiv.getElementsByTagName("ul")[0];
+        var aLiW = oUl.getElementsByTagName("li");
+
+        var oLeft = document.getElementById("left");
+        var oRight = document.getElementById("right");
+
+        oUl.innerHTML += oUl.innerHTML;
+        oUl.style.width = aLiW[0].offsetWidth * aLiW.length + "px";
+
+        var timer = null;
+        var speed = -2;
+
+        function move(){
+            if(oUl.offsetLeft > 0){
+                oUl.style.left = -oUl.offsetWidth/2 + "px";
+            }
+            else if(oUl.offsetLeft < -oUl.offsetWidth/2){//注意这里
+                oUl.style.left = 0;
+            }
+            else{
+                oUl.style.left = oUl.offsetLeft + speed + "px";
+            }
+        }
+        timer = setInterval(move,30);
+
+
+        oLeft.onclick = function(){
+            speed = -2;
+        };
+        oRight.onclick = function(){
+            speed = 2;
+        };
+
+        oDiv.onmouseover = function(){
+            clearInterval(timer);
+        };
+        oDiv.onmouseout = function(){
+            timer = setInterval(move,30);
+        };
+    </script>
+</body>
+</html>

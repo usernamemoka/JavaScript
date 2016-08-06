@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul1"></ul>
+    <script>
+    var oUl = document.getElementById("ul1");
+    var oFrag = document.createDocumentFragment();
+
+    for(var i = 0;i< 1000000;i++){
+        var oLi = document.createElement("li");
+        oFrag.appendChild(oLi);//装袋子
+    }
+    oUl.appendChild(oFrag);
+    </script>
+</body>
+</html>

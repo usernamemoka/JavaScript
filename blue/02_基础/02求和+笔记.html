@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <input type="text">
+    <input type="button" value="求和">
+    <script>
+        
+    var aInput = document.getElementsByTagName("input");
+
+    aInput[2].onclick = sum;
+    //parseInt从左到右看，一旦非数字就返回NaN
+
+    //如果想转一个不知道是整数还是浮点数的情况下用parseFloat，因为其转整数是整数，转浮点数是浮点数
+
+    /*隐式类型转换：== 先转换类型然后比较例如5="5"
+                    alert("12"-"5")结果是7
+    */
+
+    //作用域(范围)，函数内的变量是局部变量，外部无法访问
+
+    //闭包：子函数可以使用父函数的局部变量
+
+    //命名规范：匈牙利命名法，类型前缀+首字符大写
+
+    //真：true、非零数字、非空字符串、非空对象
+    //假：false、数字0、空字符串、空对象(null)、undefined
+    function sum(){
+        var num1 = parseInt(aInput[0].value);
+        var num2 = parseInt(aInput[1].value);
+        if(isNaN(num1)){
+            alert("第一个不是一个数字");
+        }
+        else if(isNaN(num2)){
+            alert("第二个不是一个数字");
+        }
+        else{
+            alert(num1+num2);
+        }
+    }
+    </script>
+</body>
+</html>

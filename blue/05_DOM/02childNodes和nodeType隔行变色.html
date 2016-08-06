@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        li{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>fsdfds</li>
+        <li>fsdfds</li>
+        <li>fsdfds</li>
+        <li>fsdfds</li>
+        <li>fsdfds</li>
+    </ul>
+    <script>
+    //childNodes  chrome空的文本节点也算
+    //nodeType为1是元素节点
+    //nodeType为3是文本节点
+
+    var oUl = document.getElementsByTagName("ul")[0];
+
+    for(var i = 0 ;i < oUl.childNodes.length; i++){
+        if(oUl.childNodes[i].nodeType == 1){
+            oUl.childNodes[i].style.backgroundColor = "red";
+        }
+    }
+
+    </script>
+</body>
+</html>

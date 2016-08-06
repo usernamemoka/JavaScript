@@ -15,7 +15,9 @@
     oBtn.onclick = function(){
         //oTxt.value = "my name is xxx";
         //oTxt.title = "my name is xxx";
-        oTxt["value"] = "my name is xxx";//第二种办法，但凡用.的地方都能用[""]代替
+        //oTxt["value"] = "my name is xxx";//第二种办法，但凡用.的地方都能用[""]代替
+        //DOM
+        oTxt.setAttribute("value","my name is ...");//第三种方法
     };
     </script>
 </body>

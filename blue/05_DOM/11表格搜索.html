@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    姓名：<input type="text" id="txt1">
+    <input type="button" value="搜索" id="btn1">
+    <table id="tab1" border="1" width="500">
+        <thead>
+            <td>ID</td>
+            <td>姓名</td>
+            <td>年龄</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>blue</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>red</td>
+                <td>33</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>black</td>
+                <td>37</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>green</td>
+                <td>58</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>pink</td>
+                <td>28</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var oTab = document.getElementById("tab1");
+        var oTxt = document.getElementById("txt1");
+        var oBtn = document.getElementById("btn1");
+
+        /*
+        oBtn.onclick = function(){
+            for(var i =0; i< oTab.tBodies[0].rows.length;i++){
+                var str1 = oTab.tBodies[0].rows[i].cells[1].innerHTML;
+                var str2 = oTxt.value;
+                if( str1 == str2 ){
+                    oTab.tBodies[0].rows[i].style.backgroundColor = "red";
+                }
+                else{
+                    oTab.tBodies[0].rows[i].style.backgroundColor = "";
+                }
+            }
+        };
+        */
+        //忽略大小写toLowerCase()
+        /*
+        oBtn.onclick = function(){
+            for(var i =0; i< oTab.tBodies[0].rows.length;i++){
+                var str1 = oTab.tBodies[0].rows[i].cells[1].innerHTML;
+                var str2 = oTxt.value;
+                if( str1.toLowerCase() == str2.toLowerCase() ){
+                    oTab.tBodies[0].rows[i].style.backgroundColor = "red";
+                }
+                else{
+                    oTab.tBodies[0].rows[i].style.backgroundColor = "";
+                }
+            }
+        };
+        */
+        //模糊搜索 str.search('aa') 返回aa在字符串str中的位置，找不到返回-1
+        /*
+        oBtn.onclick = function(){
+            for(var i =0; i< oTab.tBodies[0].rows.length;i++){
+                var str1 = oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                var str2 = oTxt.value.toLowerCase();
+                if( str1.search(str2)!=-1 ){
+                    oTab.tBodies[0].rows[i].style.backgroundColor = "red";
+                }
+                else{
+                    oTab.tBodies[0].rows[i].style.backgroundColor = "";
+                }
+            }
+        };
+        */
+        //多关键词搜索str.split(" ");字符串拆分成数组后分别被search
+        /*
+        oBtn.onclick = function(){
+            for(var i =0; i< oTab.tBodies[0].rows.length;i++){
+                var str1 = oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                var str2 = oTxt.value.toLowerCase();
+                var arr = str2.split(" ");
+
+                oTab.tBodies[0].rows[i].style.backgroundColor = "";
+
+                for(var j = 0;j<arr.length;j++){
+                    if(str1.search(arr[j]) != -1){
+                        oTab.tBodies[0].rows[i].style.backgroundColor = "red";
+                    }
+                }
+            }
+        };
+        */
+        //筛选
+        oBtn.onclick = function(){
+            for(var i =0; i< oTab.tBodies[0].rows.length;i++){
+                var str1 = oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                var str2 = oTxt.value.toLowerCase();
+                var arr = str2.split(" ");
+
+                oTab.tBodies[0].rows[i].style.display = "none";
+
+                for(var j = 0;j<arr.length;j++){
+                    if(str1.search(arr[j]) != -1){
+                        oTab.tBodies[0].rows[i].style.display = "";
+                    }
+                }
+            }
+        };
+        
+    </script>
+</body>
+</html>

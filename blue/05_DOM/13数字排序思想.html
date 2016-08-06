@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="排序" id="btn1">
+    <ul id="ul1">
+        <li>34</li>
+        <li>19</li>
+        <li>22</li>
+        <li>7</li>
+        <li>99</li>
+        <li>18</li>
+    </ul>
+    <script>
+        //找最小，appendChile排最后
+        var oUl = document.getElementById("ul1");
+        var aLi = oUl.getElementsByTagName("li");//不是怎正意义上的数组array，无sort(），而是元素集合
+        var oBtn = document.getElementById("btn1");
+
+        var arr = [];
+        oBtn.onclick = function(){
+            //转给数组
+            for(var i = 0;i<aLi.length;i++){
+                arr[i] = aLi[i];
+            }
+
+            console.log(typeof arr[0]);//object
+            //利用数组的sort方法
+            arr.sort(function(li1,li2){
+                var num1 = parseInt(li1.innerHTML);
+                var num2 = parseInt(li2.innerHTML);
+                return num1 - num2;
+            });
+
+            //appendChild已排好序的数组中的对象
+            for(var i = 0 ;i<arr.length;i++){
+                oUl.appendChild(arr[i]);
+            }
+
+        };
+
+
+    </script>
+</body>
+</html>

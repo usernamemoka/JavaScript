@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var json = {a:12,b:4,c:7};
+        var arr = [12,5,7];
+
+        //alert(json["a"]);//json的下标是个字符串
+        //alert(arr[0]);//数组的下标是个数字
+
+        //json没有length，数组有length
+
+        //for in 循环适用于数组和json
+        for(var i in arr){
+            alert("第" + i + "个数字是" + arr[i]);
+        }
+    </script>
+</body>
+</html>

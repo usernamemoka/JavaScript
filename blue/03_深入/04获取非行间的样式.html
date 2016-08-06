@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        //ie  >>  currentStyle
+        //Chrome、FF >>  getComputedStyle(oDiv,false)
+
+        //不能取复合样式例如background
+        function getStyle(obj,name){
+            if(obj.currentStyle){
+                return obj.currentStyle[name];
+            }
+            else{
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+        var oDiv = document.getElementById("div1");
+        alert(getStyle(oDiv,"width"));
+    </script>
+</body>
+</html>

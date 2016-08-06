@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1">
+    <input type="button" value="创建" id="btn1">
+    <ul id="ul1"></ul>
+    <script>
+        var oTxt = document.getElementById("txt1");
+        var oBtn = document.getElementById("btn1");
+        var oUl = document.getElementById("ul1");
+
+        oBtn.onclick = function(){
+            var oLi = document.createElement("li");
+            oLi.innerHTML = oTxt.value;
+            var aLi = oUl.getElementsByTagName("li");
+
+            if(aLi[0]){
+                oUl.insertBefore(oLi,aLi[0]);
+            }
+            else{
+                oUl.appendChild(oLi);
+            }
+        };
+
+    </script>
+</body>
+</html>
