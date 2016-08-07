@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1">
+    <textarea name="" id="txt2" cols="30" rows="10"></textarea>
+    <script>
+        
+        var oTxt1 = document.getElementById("txt1");
+        var oTxt2 = document.getElementById("txt2");
+
+        oTxt1.onkeydown = function(ev){
+            var oEvent = ev || event;
+            if(oEvent.keyCode == 13 && oEvent.ctrlKey){
+                oTxt2.value =  oTxt2.value + oTxt1.value + "\n";
+            }
+        };
+    </script>
+</body>
+</html>

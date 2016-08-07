@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="按钮" id="btn1">
+    <script>
+    var oBtn = document.getElementById("btn1");
+
+    function myAddEvent(obj,ev,fn){
+        if(obj.attachEvent){
+            obj.attachEvent("on" + ev,fn);
+        }
+        else{
+            obj.addEventListener(ev,fn,false);
+        }
+    }
+    myAddEvent(oBtn,"click",a);
+    myAddEvent(oBtn,"click",b);
+    function a(){
+        alert(1);
+    }
+    function b(){
+        alert(2);
+    }
+    </script>
+</body>
+</html>

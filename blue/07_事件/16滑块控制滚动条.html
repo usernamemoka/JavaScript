@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{
+            width: 200px;
+            position: relative;
+            border: 10px solid red;
+            height: 300px;
+            overflow: hidden;
+        }
+        #div2{
+            position: absolute;
+            top: 0;
+            padding: 5px;
+        }
+        #div3{
+            width: 500px;
+            height: 20px;
+            position: relative;
+            background-color: #ccc;
+            margin: 0 auto;
+        }
+        #div4{
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <div id="div2">【下半年想改变？我们决定送你5元钱！】2016年过半，年初的计划实现了吗？加紧规划你的下半年学习计划！去选课>> 5元钱不成敬意，优惠码：OC2016noregrets8eK，支付时输入即可减免5元。 （购课满49元有效，6月30日24点前使用有效）6月28日
+【1月福利】还没有制定新年学习计划，2016年的第一个月却一晃而过？该抓紧了！选一门课，让新年计划快马加鞭实现起来！购课时输入 OCddAEpmfr5RUSpDmK ，立减5元！去选课1月27日
+【双旦特辑】疯狂猜题第二期火爆来袭！趣味答题，赢汪峰耳机、旅行箱、智能摄像头、罗技鼠标、云课堂学习卡等丰富好礼！→开始答题2015-12-24
+课程" MySQL数据库"有新公告2015-12-10
+恭喜你在 云课堂年终感恩回馈 中抢到1111元红包! 红包详情>> 该红包可用于购买任意课程！使用时间11月9日-11月11日，逾期失效。快去选课吧>>【下半年想改变？我们决定送你5元钱！】2016年过半，年初的计划实现了吗？加紧规划你的下半年学习计划！去选课>> 5元钱不成敬意，优惠码：OC2016noregrets8eK，支付时输入即可减免5元。 （购课满49元有效，6月30日24点前使用有效）6月28日
+【1月福利】还没有制定新年学习计划，2016年的第一个月却一晃而过？该抓紧了！选一门课，让新年计划快马加鞭实现起来！购课时输入 OCddAEpmfr5RUSpDmK ，立减5元！去选课1月27日
+【双旦特辑】疯狂猜题第二期火爆来袭！趣味答题，赢汪峰耳机、旅行箱、智能摄像头、罗技鼠标、云课堂学习卡等丰富好礼！→开始答题2015-12-24
+课程" MySQL数据库"有新公告2015-12-10
+恭喜你在 云课堂年终感恩回馈 中抢到1111元红包! 红包详情>> 该红包可用于购买任意课程！使用时间11月9日-11月11日，逾期失效。快去选课吧>>【下半年想改变？我们决定送你5元钱！】2016年过半，年初的计划实现了吗？加紧规划你的下半年学习计划！去选课>> 5元钱不成敬意，优惠码：OC2016noregrets8eK，支付时输入即可减免5元。 （购课满49元有效，6月30日24点前使用有效）6月28日
+【1月福利】还没有制定新年学习计划，2016年的第一个月却一晃而过？该抓紧了！选一门课，让新年计划快马加鞭实现起来！购课时输入 OCddAEpmfr5RUSpDmK ，立减5元！去选课1月27日
+【双旦特辑】疯狂猜题第二期火爆来袭！趣味答题，赢汪峰耳机、旅行箱、智能摄像头、罗技鼠标、云课堂学习卡等丰富好礼！→开始答题2015-12-24
+课程" MySQL数据库"有新公告2015-12-10
+恭喜你在 云课堂年终感恩回馈 中抢到1111元红包! 红包详情>> 该红包可用于购买任意课程！使用时间11月9日-11月11日，逾期失效。快去选课吧>>【下半年想改变？我们决定送你5元钱！】2016年过半，年初的计划实现了吗？加紧规划你的下半年学习计划！去选课>> 5元钱不成敬意，优惠码：OC2016noregrets8eK，支付时输入即可减免5元。 （购课满49元有效，6月30日24点前使用有效）6月28日
+【1月福利】还没有制定新年学习计划，2016年的第一个月却一晃而过？该抓紧了！选一门课，让新年计划快马加鞭实现起来！购课时输入 OCddAEpmfr5RUSpDmK ，立减5元！去选课1月27日
+【双旦特辑】疯狂猜题第二期火爆来袭！趣味答题，赢汪峰耳机、旅行箱、智能摄像头、罗技鼠标、云课堂学习卡等丰富好礼！→开始答题2015-12-24
+课程" MySQL数据库"有新公告2015-12-10
+恭喜你在 云课堂年终感恩回馈 中抢到1111元红包! 红包详情>> 该红包可用于购买任意课程！使用时间11月9日-11月11日，逾期失效。快去选课吧>></div>
+    </div>
+    <div id="div3">
+        <div id="div4"></div>
+    </div>
+    <script>
+        var oDiv1 = document.getElementById("div1");
+        var oDiv2 = document.getElementById("div2");
+        var oDiv3 = document.getElementById("div3");
+        var oDiv4 = document.getElementById("div4");
+
+        drag(oDiv4);
+
+        function drag(obj){
+            var disX = 0;
+            var disY = 0;
+            obj.onmousedown = function(ev){
+                //这里位置的计算一定是mousedown的时候
+                var oEvent = ev || event;
+                disX = oEvent.clientX - obj.offsetLeft;
+                disY = oEvent.clientY - obj.offsetTop;
+
+                if(obj.setCapture){
+                    obj.onmousemove = mouseMove;
+                    obj.onmouseup = mouseUp;
+                    obj.setCapture();
+                }
+                else{
+                    document.onmousemove = mouseMove;
+                    document.onmouseup = mouseUp;
+                }
+                function mouseMove(ev){
+                    var oEvent = ev || event;
+                    var y = oEvent.clientX - disX;
+                    if(y < 0){
+                        y = 0;
+                    }
+                    else if(y > oDiv3.offsetWidth - oDiv4.offsetWidth){
+                        y = oDiv3.offsetWidth - oDiv4.offsetWidth;
+                    }
+                    obj.style.left = y + "px";
+
+                    var scale = y / (oDiv3.offsetWidth - oDiv4.offsetWidth);
+                    document.title = scale;
+
+                    oDiv2.style.top = (oDiv1.offsetHeight - oDiv2.offsetHeight - 20) * scale + "px";
+                }
+                function mouseUp(){
+                    this.onmousemove = this.onmouseup = null;
+                    if(obj.releaseCapture){
+                        obj.releaseCapture();
+                    }
+                }
+                return false;
+            };
+        }
+
+    </script>
+</body>
+</html>

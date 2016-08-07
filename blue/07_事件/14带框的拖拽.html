@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #div1{
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        function drag(obj){
+            var disX = 0;
+            var disY = 0;
+            obj.onmousedown = function(ev){
+                //这里位置的计算一定是mousedown的时候
+                var oEvent = ev || event;
+                disX = oEvent.clientX - obj.offsetLeft;
+                disY = oEvent.clientY - obj.offsetTop;
+
+                var oDiv2 = document.createElement("div");
+                oDiv2.style.width = obj.offsetWidth - 2 + "px";
+                oDiv2.style.height = obj.offsetHeight - 2 + "px";
+                oDiv2.style.border = "1px dashed black";
+                oDiv2.style.position = "absolute";
+                oDiv2.style.top = obj.offsetTop + "px";
+                oDiv2.style.left = obj.offsetLeft + "px";
+
+                document.body.appendChild(oDiv2);
+
+                if(obj.setCapture){
+                    obj.onmousemove = mouseMove;
+                    obj.onmouseup = mouseUp;
+                    obj.setCapture();
+                }
+                else{
+                    document.onmousemove = mouseMove;
+                    document.onmouseup = mouseUp;
+                }
+                function mouseMove(ev){
+                    var oEvent = ev || event;
+                    oDiv2.style.top = oEvent.clientY - disY + "px";
+                    oDiv2.style.left = oEvent.clientX - disX + "px";
+                }
+                function mouseUp(){
+                    obj.style.top = oDiv2.offsetTop + "px";
+                    obj.style.left = oDiv2.offsetLeft + "px";
+                    //oDiv2.style.display = "none";
+                    document.body.removeChild(oDiv2);
+                    this.onmousemove = this.onmouseup = null;
+                    if(obj.releaseCapture){
+                        obj.releaseCapture();
+                    }
+                }
+                return false;
+            };
+        }
+
+        var oDiv = document.getElementById("div1");
+        drag(oDiv);
+
+    </script>
+</body>
+</html>

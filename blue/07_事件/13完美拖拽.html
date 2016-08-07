@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        
+        var oDiv = document.getElementById("div1");
+        var disX = 0;
+        var disY = 0;
+
+        oDiv.onmousedown = function(ev){
+            var oEvent = ev || event;
+            disX = oEvent.clientX - oDiv.offsetLeft;
+            disY = oEvent.clientY - oDiv.offsetTop;
+            if(oDiv.setCapture){
+                oDiv.onmousemove = moveMove;
+                oDiv.onmouseup = mouseUp;
+                oDiv.setCapture();
+            }
+            else{
+                document.onmousemove = moveMove;
+                document.onmouseup = mouseUp;
+            }
+            function moveMove(ev){
+                var oEvent = ev || event;
+                var x = oEvent.clientX - disX;
+                var y = oEvent.clientY - disY;
+                // if(x < 50){
+                //     x = 0;
+                // }
+                // else if( x > document.documentElement.clientWidth - oDiv.offsetWidth - 50){
+                //     x = document.documentElement.clientWidth - oDiv.offsetWidth;
+                // }
+                // if(y < 50){
+                //     y = 0;
+                // }
+                // else if(y > document.documentElement.clientHeight - oDiv.offsetHeight - 50){
+                //     y = document.documentElement.clientHeight - oDiv.offsetHeight;
+                // }
+                oDiv.style.left = x + "px";
+                oDiv.style.top = y + "px";
+            }
+            function mouseUp(){
+                this.onmousemove = this.onmouseup = null;
+                if(oDiv.releaseCapture){
+                    oDiv.releaseCapture();
+                }
+            }
+            return false;//阻止默认事件火狐拖拽时选中文字的bug，chrome,ff,ie9
+        };
+    </script>
+</body>
+</html>
+
+
+        <!-- function drag(obj){
+            var disX = 0;
+            var disY = 0;
+            obj.onmousedown = function(ev){
+                //这里位置的计算一定是mousedown的时候
+                var oEvent = ev || event;
+                disX = oEvent.clientX - obj.offsetLeft;
+                disY = oEvent.clientY - obj.offsetTop;
+
+                if(obj.setCapture){
+                    obj.onmousemove = mouseMove;
+                    obj.onmouseup = mouseUp;
+                    obj.setCapture();
+                }
+                else{
+                    document.onmousemove = mouseMove;
+                    document.onmouseup = mouseUp;
+                }
+                function mouseMove(ev){
+                    var oEvent = ev || event;
+
+                    obj.style.top = oEvent.clientY - disY + "px";
+                    obj.style.left = oEvent.clientX - disX + "px";
+                }
+                function mouseUp(){
+                    this.onmousemove = this.onmouseup = null;
+                    if(obj.releaseCapture){
+                        obj.releaseCapture();
+                    }
+                }
+                return false;
+            };
+        }
+ -->

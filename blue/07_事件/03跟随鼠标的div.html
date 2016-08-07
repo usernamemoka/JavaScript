@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body style="height:2000px;">
+    <div id="div1"></div>
+    <script>
+        var scrollTop = 0;
+        var oClientX = 0;
+        var oClientY = 0;
+        var oDiv = document.getElementById("div1");
+        window.onscroll = function(){
+            scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            document.onmousemove = function(ev){
+                var oEvent = ev || event;
+                oClientX = oEvent.clientX;
+                oClientY = oEvent.clientY;
+                //move的时候计算一次
+                oDiv.style.left = oClientX +　"px";
+                oDiv.style.top = oClientY + scrollTop + "px";
+            };
+            //滚动的时候再计算一次
+            oDiv.style.left = oClientX +　"px";
+            oDiv.style.top = oClientY + scrollTop + "px";
+        };
+        // window.onload 时方块默认在页面左侧，可以采用先隐藏，scroll时再显示解决
+    </script>
+</body>
+</html>

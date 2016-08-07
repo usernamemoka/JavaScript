@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        
+        #div1{
+            width: 500px;
+            height: 20px;
+            background-color: #ccc;
+            position: relative;
+            margin: 0 auto;
+        }
+        #con{
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        #div2{
+            background-color: red;
+            filter:alpha(opacity:0);
+            opacity: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <div id="con"></div>
+    </div>
+    <div id="div2"></div>
+    <script>
+
+        var oDiv1 = document.getElementById("div1");
+        var oCon = document.getElementById("con");
+        var oDiv2 = document.getElementById("div2");
+
+        drag(oCon);
+
+        function drag(obj){
+            var disX = 0;
+            var disY = 0;
+            obj.onmousedown = function(ev){
+                //这里位置的计算一定是mousedown的时候
+                var oEvent = ev || event;
+                disX = oEvent.clientX - obj.offsetLeft;
+                disY = oEvent.clientY - obj.offsetTop;
+
+                if(obj.setCapture){
+                    obj.onmousemove = mouseMove;
+                    obj.onmouseup = mouseUp;
+                    obj.setCapture();
+                }
+                else{
+                    document.onmousemove = mouseMove;
+                    document.onmouseup = mouseUp;
+                }
+                function mouseMove(ev){
+                    var oEvent = ev || event;
+                    var y = oEvent.clientX - disX;
+                    if(y < 0){
+                        y = 0;
+                    }
+                    else if(y > oDiv1.offsetWidth - oCon.offsetWidth){
+                        y = oDiv1.offsetWidth - oCon.offsetWidth;
+                    }
+                    obj.style.left = y + "px";
+
+                    var scale = y / (oDiv1.offsetWidth - oCon.offsetWidth);
+                    document.title = scale;
+
+                    oDiv2.style.width = scale * 300 + "px";
+                    oDiv2.style.height = scale * 300 + "px";
+                    oDiv2.style.filter = 'alpha(opacity:'+ scale * 100 +')';
+                    oDiv2.style.opacity = scale;
+
+                }
+                function mouseUp(){
+                    this.onmousemove = this.onmouseup = null;
+                    if(obj.releaseCapture){
+                        obj.releaseCapture();
+                    }
+                }
+                return false;
+            };
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        
+        var oDiv = document.getElementById("div1");
+        var disX = 0;
+        var disY = 0;
+
+        oDiv.onmousedown = function(ev){
+            var oEvent = ev || event;
+            disX = oEvent.clientX - oDiv.offsetLeft;
+            disY = oEvent.clientY - oDiv.offsetTop;
+
+            document.onmousemove = function(ev){
+                var oEvent = ev || event;
+                var x = oEvent.clientX - disX;
+                var y = oEvent.clientY - disY;
+                if(x < 50){
+                    x = 0;
+                }
+                else if( x > document.documentElement.clientWidth - oDiv.offsetWidth - 50){
+                    x = document.documentElement.clientWidth - oDiv.offsetWidth;
+                }
+                if(y < 50){
+                    y = 0;
+                }
+                else if(y > document.documentElement.clientHeight - oDiv.offsetHeight - 50){
+                    y = document.documentElement.clientHeight - oDiv.offsetHeight;
+                }
+                oDiv.style.left = x + "px";
+                oDiv.style.top = y + "px";
+            };
+            document.onmouseup = function(){
+                oDiv.onmousemove = oDiv.onmouseup = null;
+            };
+            return false;//阻止默认事件火狐bug
+        };
+    </script>
+</body>
+</html>

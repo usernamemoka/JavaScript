@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body style="height:2000px;">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+    function getPos(ev){
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+        return {x:ev.clientX + scrollLeft,y:ev.clientY + scrollTop};
+    }
+
+    var aDiv = document.getElementsByTagName("div");
+    document.onmousemove = function(ev){
+        var oEvent = ev || event;
+        var oX = getPos(oEvent).x;
+        var oY = getPos(oEvent).y;
+        //后一个跟着前一个，第一个跟着鼠标
+        for(var i = aDiv.length-1; i > 0;i --){
+            aDiv[i].style.left = aDiv[i-1].offsetLeft + "px";
+            aDiv[i].style.top = aDiv[i-1].offsetTop + "px";
+        }
+        aDiv[0].style.top = oY + "px";
+        aDiv[0].style.left = oX + "px";
+    };
+    </script>
+</body>
+</html>
