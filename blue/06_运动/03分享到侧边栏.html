@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: -100px;
+        }
+        #div1 span{
+            width: 20px;
+            text-align: center;
+            position: absolute;
+            right: -20px;
+            top: 50px;
+            background-color: pink;
+            padding: 10px 0;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"><span>分享到</span></div>
+
+    <script>
+        
+        var oDiv = document.getElementById("div1");
+        var timer = null;
+
+        oDiv.onmouseover = function(){
+            startMove(0);
+        };
+        oDiv.onmouseout = function(){
+            startMove(-100);
+        };
+
+        function startMove(iTarget){
+            clearInterval(timer);
+            timer = setInterval(function(){
+                if(oDiv.offsetLeft > iTarget){//offsetLeft > 目标点 速度负
+                    speed = -7;
+                }
+                else{
+                    speed = 7;
+                }
+                if(Math.abs(iTarget - oDiv.offsetLeft) <= 7){
+                    clearInterval(timer);
+                    oDiv.style.left = iTarget + "px";
+                }
+                else{
+                    oDiv.style.left = oDiv.offsetLeft + speed + "px";
+                }
+            },30);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            float: left;
+            margin: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <script>
+        function getStyle(obj,name){
+            if(obj.currentStyle){
+                return obj.currentStyle[name];
+            }
+            else{
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+
+        var aDiv = document.getElementsByTagName("div");
+
+        aDiv[0].onmouseover = function(){
+            startMove(this,"width","300");
+        };
+        aDiv[0].onmouseout = function(){
+            startMove(this,"width","100");
+        };
+        aDiv[1].onmouseover = function(){
+            startMove(this,"height",300);
+        };
+        aDiv[1].onmouseout = function(){
+            startMove(this,"height",100);
+        };
+        aDiv[2].onmouseover = function(){
+            startMove(this,"borderWidth","10");
+        };
+        aDiv[2].onmouseout = function(){
+            startMove(this,"borderWidth","1");
+        };
+
+
+        function startMove(obj,name,iTarget){
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                var cur = parseInt( getStyle(obj,name) );//getStyle获取的值是带单位的
+                var speed = (iTarget - cur) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+                if(cur == iTarget){
+                    clearInterval(obj.timer);
+                }
+                else{
+                    obj.style[name] = cur + speed + "px";
+                }
+            },30);
+        }
+    </script>
+</body>
+</html>

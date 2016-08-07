@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //匀速运动的bug：不会停止(==)、速度取某些值无法停止(>=)、到达位置后点击还会动(if else)、重复点击速度加快(上去先关闭定时器)
+
+    //缓冲运动 >> 距离大，速度大；距离小，速度小
+
+    //像素是屏幕显示的最小单位 290.9 >> 290 并不是四舍五入
+
+    //匀速运动的停止条件，缓冲运动则无这样的停止条件
+
+    //多物体运动框架 所有值都不能共用
+
+    //offsetWidth 的问题用getStyle() >> getComputedStyle(obj,false)["width"]代替，这个也能获取透明度
+
+    //startMove(iTarget)
+    //startMove(obj,iTarget)
+    //startMove(obj,attr,iTarget)
+    //startMove(obj,attr,iTarget,fn)
+    //startMove(obj,json,fn)
+    </script>
+</body>
+</html>

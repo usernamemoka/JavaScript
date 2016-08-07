@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-color: red;
+            position: absolute;
+            filter:alpha(opacity:30);
+            opacity: .3;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        //透明度获取和设置时候的问题
+        function getStyle(obj,name){
+            if(obj.currentStyle){
+                return obj.currentStyle[name];
+            }
+            else{
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+
+        var oDiv = document.getElementById("div1");
+
+        oDiv.onmouseover = function(){
+            startMove(this,"opacity",100);
+        };
+        oDiv.onmouseout = function(){
+            startMove(this,"opacity",30);
+        };
+
+        function startMove(obj,attr,iTarget){
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                var cur = 0;
+                if(attr == "opacity"){
+                    cur = Math.round(parseFloat(getStyle(obj,attr))*100);//透明度parseInt有问题，Math.round()去掉小数解决ie7透明度跳动的问题
+                }
+                else{
+                    cur = parseInt(getStyle(obj,attr));
+                }
+                var speed = (iTarget - cur) / 7;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+                if(cur == iTarget){
+                    clearInterval(obj.timer);
+                }
+                else{
+                    if(attr == "opacity"){
+                        obj.style.filter = 'alpha(opacity:'+(cur + speed)+')';
+                        obj.style.opacity = (cur + speed) / 100;
+                        document.title = obj.style.opacity;//ie7这个opacity值一直会跳动 例如0.07 * 100
+                    }
+                    else{
+                        obj.style[attr] = cur + speed + "px";
+                    }
+                }
+            },30);
+        }
+
+    </script>
+</body>
+</html>

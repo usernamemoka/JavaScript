@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        //102
+        var oDiv = document.getElementById("div1");
+
+        setInterval(function(){
+            //这里要是减2刚好等于边框的总宽就会纹丝不动
+            oDiv.style.width = oDiv.offsetWidth - 1 + "px";
+        },30);
+    </script>
+</body>
+</html>

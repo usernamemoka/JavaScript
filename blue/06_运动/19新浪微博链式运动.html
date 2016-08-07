@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul{
+            margin: -100px auto 0;
+            width: 500px;
+            min-height: 300px;
+            border: 1px solid black;
+            list-style-type: none;
+        }
+        li{
+            border-bottom: 1px dashed #333;
+            padding: 5px;
+            filter:alpha(opacity:0);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="" cols="30" rows="10" id="txt1"></textarea>
+    <input type="button" value="发布" id="btn1">
+    <ul id="ul1">
+    </ul>
+    <script src="js/startMove.js"></script>
+    <script>
+        var oTxt = document.getElementById("txt1");
+        var oBtn = document.getElementById("btn1");
+        var oUl = document.getElementById("ul1");
+
+        oBtn.onclick = function(){
+            var oLi = document.createElement("li");
+            oLi.innerHTML = oTxt.value;
+            oTxt.value = "";
+            if(oUl.children.length > 0){
+                oUl.insertBefore(oLi,oUl.children[0]);
+            }
+            else{
+                oUl.appendChild(oLi);
+            }
+            //插入之后的操作
+            var iHeight = parseInt(getStyle(oLi,"height"));//注意getStyle获取的是带单位的
+            //var iHeight = oLi.offsetHeight;
+            console.log(iHeight);
+            oLi.style.height = 0;
+            startMove(oLi,{"height":iHeight},function(){
+                startMove(oLi,{"opacity":100});
+            });
+        };
+
+    </script>
+</body>
+</html>

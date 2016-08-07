@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            background-color: red;
+            filter:alpha(opacity:30);
+            opacity: .3;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        function getStyle(obj,attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }
+            else{
+                return getComputedStyle(obj,false)[attr];
+            }
+        }
+        function startMove(obj,json,fnEnd){
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                var oStop = true;
+                for( var attr in json){
+                    var cur = 0;
+                    if(attr == "opacity"){
+                        cur = Math.round( parseFloat( getStyle(obj,attr) ) * 100 );
+                    }
+                    else{
+                        cur = parseInt( getStyle(obj,attr) );
+                    }
+
+                    var speed = (json[attr] - cur) / 7;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+                    if(cur != json[attr]){
+                        oStop = false;
+                    }
+                    if(attr == "opacity"){
+                        obj.style.filter = 'alpha(opacity:'+(cur+speed)+')';
+                        obj.style.opacity = (cur + speed) / 100;
+                    }
+                    else{
+                        obj.style[attr] = cur + speed + "px";
+                    }
+                }
+                if(oStop){
+                    clearInterval(obj.timer);
+                    fnEnd&&fnEnd();
+                }
+            },30);
+        }
+
+        var oDiv = document.getElementById("div1");
+        oDiv.onclick = function(){
+            startMove(oDiv,{"width":"110","height":"300","opacity":100,"borderWidth":"30"},function(){
+                alert(1);
+            });
+        };
+    </script>
+</body>
+</html>
