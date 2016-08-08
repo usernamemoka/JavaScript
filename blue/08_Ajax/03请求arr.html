@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="请求" id="btn1">
+    <script src="ajax.js"></script>
+    <script>
+        var oBtn = document.getElementById("btn1");
+
+        oBtn.onclick = function(){
+            ajax('arr.txt?t='+new Date().getTime(),function(str){
+                var arr = eval(str);
+                alert(arr[0]);
+            },function(){
+                alert("失败");
+            });
+        };
+    </script>
+</body>
+</html>

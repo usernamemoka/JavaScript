@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="请求" id="btn1">
+    <ul id="ul1">
+        <!-- <li>用户名：<strong>yangk</strong>密码：<span>123</span></li> -->
+    </ul>
+    <script src="ajax.js"></script>
+    <script>
+        var oBtn = document.getElementById("btn1");
+        var oUl = document.getElementById("ul1");
+
+        oBtn.onclick = function(){
+            ajax('user.txt?t='+new Date().getTime(),function(str){
+                var arr = eval(str);
+                for(var i = 0; i < arr.length;i++){
+                    var oLi = document.createElement("li");
+                    oLi.innerHTML = '<li>用户名：<strong>'+arr[i].user+'</strong>密码：<span>'+arr[i].pass+'</span></li>';
+                    oUl.appendChild(oLi);
+                }
+            },function(){
+                alert("失败");
+            });
+        };
+    </script>
+</body>
+</html>

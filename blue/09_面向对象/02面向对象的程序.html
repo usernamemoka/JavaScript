@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        var obj = new Object();
+
+        obj.name = 'blue';
+        obj.qq = '351402';
+        obj.showName = function(){
+            alert(this.name);
+        };
+        obj.showQq = function(){
+            alert(this.qq);
+        };
+        obj.showName();
+        obj.showQq();
+        */
+
+        /*//构造函数
+        function createPerson(name,qq){
+            //原料
+            var obj = new Object();
+            //加工
+            obj.name = name;
+            obj.qq = qq;
+            obj.showName = function(){
+                alert(this.name);
+            };
+            obj.showQq = function(){
+                alert(this.qq);
+            };
+            //出厂
+            return obj;
+        }
+        var obj1 = createPerson('blue','3333');
+        var obj2 = createPerson('yangk','5666');
+
+        obj1.showName();
+        obj1.showQq();
+
+        obj2.showName();
+        obj2.showQq();
+        */
+
+        //上面的问题，1：没有new；2：obj1.showName != obj2.showName
+
+        /*//解决没有new问题
+        function CreatePerson(name,qq){
+            //var this = new Object();
+
+            this.name = name;
+            this.qq = qq;
+            this.showName = function(){
+                alert(this.name);
+            };
+            this.showQq = function(){
+                alert(this.qq);
+            };
+
+            //return this;
+        }
+        var obj1 = new CreatePerson('blue','3333');
+        var obj2 = new CreatePerson('yangk','5666');
+
+        obj1.showName();
+        obj1.showQq();
+
+        obj2.showName();
+        obj2.showQq();
+        */
+
+        //解决obj1.showName != obj2.showName
+        function CreatePerson(name,qq){
+            //var this = new Object();
+
+            this.name = name;
+            this.qq = qq;
+
+            //return this;
+        }
+        CreatePerson.prototype.showName = function(){
+            alert(this.name);
+        };
+        CreatePerson.prototype.showQq = function(){
+            alert(this.qq);
+        };
+        var obj1 = new CreatePerson('blue','3333');
+        var obj2 = new CreatePerson('yangk','5666');
+
+        obj1.showName();
+        obj1.showQq();
+
+        obj2.showName();
+        obj2.showQq();
+    </script>
+</body>
+</html>

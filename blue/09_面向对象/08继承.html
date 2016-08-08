@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //继承：父级的属性和方法
+        /*
+        function A(){
+            this.abc = 12;
+        }
+        A.prototype.show = function(){
+            alert(this.abc);
+        };
+
+        //继承A
+        function B(){
+            //this > new B()
+            A.call(this);
+        };
+        var obj = new B();
+        alert(obj.abc);
+        */
+        /*
+        function A(){
+            this.abc = 12;
+        }
+        A.prototype.show = function(){
+            alert(this.abc);
+        };
+
+        //继承A
+        function B(){
+            //this > new B()
+            A.call(this);
+        };
+        B.prototype = A.prototype;//B新添加的方法A也会有
+        B.prototype.fn = function(){
+            alert("abc");
+        };
+
+        var objb = new B();
+        var obja = new A();
+        //objb.show();
+        obja.fn();
+        */
+        function A(){
+            this.abc = 12;
+        }
+        A.prototype.show = function(){
+            alert(this.abc);
+        };
+
+        //继承A
+        function B(){
+            //this > new B()
+            A.call(this);
+        };
+        for(var i in A.prototype){
+            B.prototype[i] = A.prototype[i];
+        }
+        B.prototype.fn = function(){
+            alert("abc");
+        };
+
+        var objb = new B();
+        var obja = new A();
+        //objb.show();
+        obja.fn();//obja没有fn方法，解决！
+
+        
+    </script>
+</body>
+</html>

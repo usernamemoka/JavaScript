@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function show(a,b){
+        alert(this);
+        alert(a);
+        alert(b);
+    }
+    //show();
+    show.call("abc",12,5);//改变this指向，第一个参数是this
+    </script>
+</body>
+</html>
