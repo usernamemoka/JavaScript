@@ -3,8 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+    div{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        cursor: pointer;
+    }
+    #div1{
+        top: 0;
+        background-color: red;
+    }
+    #div2{
+        top: 200px;
+        background-color: green;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        new Drag("div1");
+        new ChildDrag("div2");
+
+        //var drag1 = new Drag("div1");
+        //console.log(drag1.oDiv.onmousedown());
+    };
+    function Drag(id){
+            this.oDiv = document.getElementById(id);
+            this.disX = 0;
+            this.disY = 0;
+            var _this = this;
+            this.oDiv.onmousedown = function(ev){
+                var oEvent = ev || event;
+                _this.mouseDown(oEvent);
+                return false;//这个位置很有讲究
+            };
+    }
+    Drag.prototype.mouseDown = function(oEvent){
+        this.disX = oEvent.clientX - this.oDiv.offsetLeft;
+        this.disY = oEvent.clientY - this.oDiv.offsetTop;
+        var _this = this;
+        if(this.oDiv.setCapture){
+            this.oDiv.onmousemove = function(ev){
+                var oEvent = ev || event;
+                _this.mouseMove(oEvent);//谁调用属于谁
+            };
+            this.oDiv.onmouseup = function(){
+                _this.mouseUp(this);//this指this.oDiv
+            };
+            this.oDiv.setCapture();
+        }
+        else{
+            document.onmousemove = function(ev){
+                var oEvent = ev || event;
+                _this.mouseMove(oEvent);
+            };
+            document.onmouseup = function(){
+                _this.mouseUp(this);//this指document
+            };
+        }
+        //return false;//这个位置很有讲究
+    };
+    Drag.prototype.mouseMove = function(oEvent){
+        var x = oEvent.clientX - this.disX;
+        var y = oEvent.clientY - this.disY;
+        this.oDiv.style.left = x + "px";
+        this.oDiv.style.top = y + "px";
+    };
+    Drag.prototype.mouseUp = function(obj){
+        obj.onmousemove = obj.onmouseup = null;//this指this.oDiv或document
+        if(this.oDiv.releaseCapture){
+            this.oDiv.releaseCapture();
+        }
+    };
+
+    function ChildDrag(id){
+        Drag.call(this,id);//属性call
+    }
+    function extend(obj1,obj2){//方法拷贝继承
+        for(var attr in obj2){
+            obj1[attr] = obj2[attr];
+        }
+    }
+    extend(ChildDrag.prototype,Drag.prototype);
+    ChildDrag.prototype.mouseMove = function(oEvent){
+        var x = oEvent.clientX - this.disX;
+        var y = oEvent.clientY - this.disY;
+        if(x < 20){
+            x = 0;
+        }
+        else if(x > document.documentElement.clientWidth - this.oDiv.offsetWidth - 20){
+            x = document.documentElement.clientWidth - this.oDiv.offsetWidth;
+        }
+        if(y < 20){
+            y = 0;
+        }
+        else if(y > document.documentElement.clientHeight - this.oDiv.offsetHeight - 20){
+            y = document.documentElement.clientHeight - this.oDiv.offsetHeight;
+        }
+        this.oDiv.style.left = x + "px";
+        this.oDiv.style.top = y + "px";
+    };
+    </script>
 </head>
 <body>
-    
+    <div id="div1"></div>
+    <div id="div2"></div>
 </body>
 </html>

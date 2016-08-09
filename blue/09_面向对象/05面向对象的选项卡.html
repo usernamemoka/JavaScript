@@ -28,22 +28,27 @@
         <div>旅游...</div>
     </div>
     <script>
-        //通过html加进去的属性浏览器不认，通过JS加进去浏览器认
-        var oWrap = document.getElementById("wrap");
-        var aInput = oWrap.getElementsByTagName("input");
-        var aDiv = oWrap.getElementsByTagName("div");
-
-        for(var i = 0;i < aInput.length;i ++){
-            aInput[i].index = i;//注意位置
-            aInput[i].onclick = function(){
-                for(var i = 0;i < aInput.length;i ++){
-                    aInput[i].className = "";
-                    aDiv[i].className = "";
-                }
-                this.className = "on";
-                aDiv[this.index].className = "active";
-            };
+        function Tab(id){
+            this.oWrap = document.getElementById(id);
+            this.aInput = this.oWrap.getElementsByTagName("input");
+            this.aDiv = this.oWrap.getElementsByTagName("div");
+            var _this = this;
+            for(var i = 0;i < this.aInput.length;i ++){
+                this.aInput[i].index = i;//注意位置
+                this.aInput[i].onclick = function(){
+                    _this.switch(this);
+                };
+            }
         }
+        Tab.prototype.switch = function(oBtn){
+            for(var i = 0;i < this.aInput.length;i ++){
+                this.aInput[i].className = "";
+                this.aDiv[i].className = "";
+            }
+            oBtn.className = "on";
+            this.aDiv[oBtn.index].className = "active";
+        };
+        new Tab("wrap");
 
     </script>
 </body>
