@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="txt" cols="30" rows="10"></textarea>
+    <input type="button" value="运行" id="btn">
+    <script>
+    var oTxt = document.getElementById("txt");
+    var oBtn = document.getElementById("btn");
+
+    oBtn.onclick = function(){
+        var oNewWin = window.open("about:blank","_blank");
+        oNewWin.document.write(oTxt.value);
+    };
+    </script>
+</body>
+</html>
