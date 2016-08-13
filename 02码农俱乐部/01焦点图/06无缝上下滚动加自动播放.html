@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>焦点图</title>
+<style>
+body,ul,ol{margin:0;padding:0;}
+li{ list-style:none;}
+img{ border:none; vertical-align:top; }
+#box{width:470px;height:150px; position:relative; margin:30px auto; overflow:hidden;}
+ul{ width:470px; position:absolute;left:0; top:0; z-index:1;}
+ul li{width:470px;}
+ol{z-index:2; width:120px; position:absolute;right:10px; bottom:10px;}
+ol li{ width:20px;height:20px; float:left;margin:0 2px; display:inline; background:#fff; color:#f60; line-height:20px; text-align:center;}
+ol .active{ background:#f60; color:#fff;}
+</style>
+<script src="js/move.js"></script>
+<script>
+window.onload = function(){
+    var oWrap = document.getElementById("box");
+    var oUl = oWrap.getElementsByTagName("ul")[0];
+    var oOl = oWrap.getElementsByTagName("ol")[0];
+    var aUlLi = oUl.getElementsByTagName("li");
+    var aOlLi = oOl.getElementsByTagName("li");
+
+    var oOlHeight = aUlLi[0].offsetHeight;
+    var iNow = 0;//按钮
+    var iNow2 = 0;//滚动
+    var timer = null;
+
+    for(var i = 0;i < aOlLi.length;i++){
+        aOlLi[i].index = i;
+        aOlLi[i].onmouseover = function(){
+            iNow = this.index;
+            iNow2 = this.index;
+            move();
+        };
+    }
+    function move(){
+        for(var i = 0;i < aOlLi.length;i++){
+            aOlLi[i].className = "";
+        }
+        aOlLi[iNow].className = "active";
+        startMove(oUl,{"top":- oOlHeight * iNow2},function(){
+            //1处
+        });
+    }
+    function change(){
+        if(iNow == 0){//这个也可以放在 1处 判断
+            aUlLi[0].style.position = "static";//最后一张跑第一张，此时瞬间空白
+            console.log(oUl.style.top);//此时oUl还是-750，马上拉回来
+            oUl.style.top = 0;
+            iNow2 = 0;
+        }
+        //这里不能else if 不然下面的iNow ++ 就不会执行了
+        if(iNow == aUlLi.length-1){
+            iNow = 0;
+            aUlLi[0].style.position = "relative";
+            aUlLi[0].style.top = aUlLi.length * oOlHeight + "px";
+        }
+        else{
+            iNow ++;
+        }
+        iNow2 ++;//iNow2
+        move();
+    }
+    timer = setInterval(change,2000);
+
+    oWrap.onmouseover = function(){
+        clearInterval(timer);
+    };
+    oWrap.onmouseout = function(){
+        timer = setInterval(change,2000);
+    };
+};
+</script>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li><img src="images/1.jpg" alt=""/></li>
+        <li><img src="images/2.jpg" alt=""/></li>
+        <li><img src="images/3.jpg" alt=""/></li>
+        <li><img src="images/4.jpg" alt=""/></li>
+        <li><img src="images/5.jpg" alt=""/></li>
+    </ul>
+    <ol>
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+</div>
+</body>
+</html>
