@@ -231,7 +231,7 @@
 
             var This = this;
             nowLi.timer = setInterval(function(){
-                //这里有问题？？
+                //原版有个报错，对比下
                 var a = (This.oA.offsetLeft + This.oA.offsetWidth / 2) - (nowLi.offsetLeft + nowLi.parentNode.offsetLeft + nowLi.offsetWidth / 2);
 
                 var b = (This.oA.offsetTop + This.oA.offsetHeight/2) - (nowLi.offsetTop + nowLi.parentNode.offsetTop + nowLi.offsetHeight / 2 );
