@@ -31,7 +31,7 @@ window.onload = function(){
     for(var i = 0;i < aOlLi.length;i++){
         aOlLi[i].index = i;
         aOlLi[i].onmouseover = function(){
-            iNow = this.index;
+            iNow = this.index;//mouseover的时候iNow就不用++了
             iNow2 = this.index;
             move();
         };
@@ -66,7 +66,7 @@ window.onload = function(){
     }
     timer = setInterval(change,2000);
 
-    oWrap.onmouseover = function(){
+    oWrap.onmouseover = function(){//清楚定时器很重要，不然当mouseover的时候定时器也在进行，就会打架
         clearInterval(timer);
     };
     oWrap.onmouseout = function(){

@@ -29,12 +29,19 @@ window.onload = function(){
     for(var i = 0;i < aUlLi.length;i++){
         aUlLi[i].index = i;
         aUlLi[i].onmouseover = function(){//每次移动的时候都是一个循环，讲对所有li位置进行计算
-            for(var i = 0; i< aUlLi.length;i++){
+            for(var i = 0; i< aUlLi.length;i++){//是运动多张用循环
                 //当移入第二个的时候，索引为1，0，1走if；2,3,4走else
-                if(i <= this.index){
+                console.log(i + ":" + this.index);
+                //假如移入的是第二张
+                //0:2
+                //1:2
+                //2:2
+                //3:2
+                //4:2
+                if(i <= this.index){//运动this.index左边的
                     startMove(aUlLi[i],{"left":i * 30});
                 }
-                else{//i > this.index
+                else{//i > this.index，只有this.index右边的符合
                     startMove(aUlLi[i],{"left":(470 - 120) + (i - 1) * 30});
                     console.log(i);
                 }

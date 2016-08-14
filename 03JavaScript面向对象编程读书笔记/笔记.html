@@ -1,0 +1,307 @@
+<script>
+document.location.href
+
+tab键自动完成
+
+about:config  >>  strict  >>  javascript.options.strict
+
+变量名区分大小写
+
+8进制以0开头
+
+#ff0000十六进制
+
+2e2或2e+2表示2后面加两个0即200
+
+Infinity最大数
+
+Number类型转换为String，只需要将其与空字符串链接即可
+
+使用双重取反可以将任何值转换为等效的布尔值，var b = "one"; !!b >> true
+
+逻辑运算符的目的是得到真假，一旦能确定结果马上返回，不能确定继续执行
+不确定某个变量是否被定义了，如果这里的mynumber之前被初始化为0、""、null、undefined、NaN、false，结果不为我们所愿
+var mynumber = mynumber || 10; 有真即真
+
+不存在或未经赋值的变量，undefined
+
+var s = "one"; s[0] >> o  s.charAt(0) > o
+
+代码块
+
+检测变量是否存在
+if(somevar){ ... }//somevar 不存在时会报错
+
+检测变量是否存在
+if(typeof somevar !== "undefined"){ ... }
+
+调用函数忘记传递某个参数，其默认undefined
+
+传递的参数过多，多余的将会被忽略掉
+
+arguments类数组，实参的集合
+
+isNaN讨厌数字  >>  isNaN(123) false
+
+不能为变量定义特定的块作用于，但可以定义所属的函数作用域
+
+var a = 123;
+function f(){
+    alert(a);//undefined函数域始终优先于全局域
+    var a = 1;
+    alert(a);
+};
+f();
+
+函数也是一种数据类型 var f = function(){ return 1; }
+
+function a(){} function b(){}
+a = b;
+delete b;
+a依然存在
+
+回调函数，函数中传递函数，可以将一个函数的调用操作委托给另一个函数
+
+自调匿名函数，不会产生全局变量，适合执行一次性的或初始化的任务
+(function(){ ... })(); var a = function(){}();
+
+私有函数：函数内的函数
+
+
+function aaa(){
+    var a = [];
+    for(var i = 0; i< 3; i++){
+        a[i] = i;
+    }
+    return a;
+}
+console.log(aaa());
+
+
+function aaa(){
+    var a = [];
+    for(var i = 0; i< 3; i++){
+        a[i] = function(){
+            return i;
+        };
+    }
+    return a;
+}
+var arr = aaa();
+console.log(arr[0]());
+console.log(arr[1]());
+console.log(arr[2]());
+
+
+function aaa(){
+    var a = [];
+    for(var i = 0; i< 3; i++){
+        a[i] = (function(x){
+            return function(){//注意这里return
+                return x;
+            }
+        })(i);
+    }
+    return a;
+}
+var arr = aaa();
+console.log(arr[0]());
+console.log(arr[1]());
+console.log(arr[2]());
+
+
+var getValue,setValue;
+(function(){
+    var secret = 0;
+    getValue = function(){
+        return secret;
+    }
+    setValue = function(val){
+        secret = val;
+    }
+})();
+setValue();
+getValue(123);
+setValue();
+
+
+数组next()
+
+function setup(x){
+    var i = 0;
+    return function(){
+        //var num = i++;相当于下面i++
+        return x[i++];
+    };
+}
+var next = setup(['a','b','c']);
+console.log(next());
+console.log(next());
+console.log(next());
+
+
+var myarr = ["a"];
+myarr;
+
+如果我们要访问的属性名是不确定的，就必须使用中括号表示法了
+var key = "firstname";
+book[key];
+
+function Aaa(name,job){
+    this.name = name;
+    this.job = job;
+    this.show = function(){
+        console.log("my name is " + name +",my job is " + job);
+    };
+}
+var obj1 = new Aaa('yangk','开发');
+obj1.show();
+
+//constructor
+function Aaa(name){
+    this.name = name;
+}
+var obj1 = new Aaa('yangk')
+var obj2 = new obj1.constructor('haha');
+console.log(obj2.name);
+
+
+var o = {};
+o.constructor; >> Object();
+
+instanceof测试一个对象是不是由某个构造器函数所创建的
+
+function Aaa(){
+    this.a = 1;
+    return{
+        b:2
+    };
+    return this;
+}
+var obj1 = new Aaa();
+console.log(obj1.a);
+console.log(obj1.b);
+
+
+//重要！！
+function Aaa(){
+    this.a = 1;
+    return{//构造器返回的不在是包含a的this对象，这也只有在函数返回值是一个对象时才会发生，而当我们返回一个非对象类型时，该构造器函数将会照常返回this
+        b:2
+    };
+    //return this;默认
+}
+var obj1 = new Aaa();
+console.log(obj1.a);
+console.log(obj1.b);
+
+
+比较两个对象，当且仅当两个引用指向同一个对象时为true
+
+slice(1,3)截取数组1到3，不包括3，不改变目标数组，1,3是索引
+
+splice(1,2)会改变目标数组，包括第一个，1是索引，2是个数
+
+new Function()  >>  传递参数注意
+
+
+
+function A(){
+  return A.caller;
+}
+function B(){
+  return A();//不写return直接调用B()会返回undefined
+}
+B();
+
+function A(){
+  return A.caller;
+}
+function B(){
+  ss = A();//不写return直接调用B()会返回undefined
+}
+B();
+console.log(ss);
+
+
+call()和apply()，让对象去借用其他对象中的方法
+
+//重要！！！
+var obj1 = {
+    name : 'yangk',
+    say : function(who){
+        console.log( this.name + "是" + who );
+    }
+};
+obj1.say("杨康");
+
+var obj2 = {
+    name : 'guojing'
+};
+
+obj1.say.call(obj2,"郭靖");//当say()被调用时，其中this就被自动设置成了obj2对象的引用
+
+
+
+var name = 'aaa';
+var obj1 = {
+    name : 'yangk',
+    say : function(who){
+        console.log( this.name + "是" + who );
+    }
+};
+//obj1.say("杨康");
+var obj2 = {
+    name : 'guojing'
+};
+obj1.say.call(null,"郭靖");//如果我们没有将对象传递给call()的首参数，或者传递的是null，调用对象的this默认全局对象
+
+
+apply后面传值的方式是数组
+
+arguments.callee引用的是当前被调用的函数对象，函数返回arguments.callee函数被调用是返回自身的引用
+arguments.callee实现匿名函数的递归调用
+
+(function(count){
+    if(count < 5){
+        alert(count);
+        arguments.callee(++count);
+    }
+})(1);
+
+
+alert(obj);obj对象自动调用toString()方法
+
+/* 闭包 */
+// var arr = [];
+// for(var i = 0;i < 5;i++){
+//     arr[i] = function(){
+//         return i;
+//     };
+// }
+// console.log(arr[0]());
+
+// var arr = [];
+// for(var i = 0;i < 5;i++){
+//     arr[i] = (function(i){
+//         return function(){
+//             return i;  
+//         };
+//     })(i);
+// }
+// console.log(arr[0]());
+
+// var arr = [];
+// for(var i = 0;i < 5;i++){
+//     (function(i){
+//         arr[i] = function(){
+//             return i;
+//         };
+//     })(i);
+// }
+// console.log(arr[0]());
+
+
+
+
+</script>

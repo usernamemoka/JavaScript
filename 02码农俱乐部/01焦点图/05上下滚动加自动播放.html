@@ -80,3 +80,25 @@ window.onload = function(){
 </div>
 </body>
 </html>
+    <!-- for(var i = 0; i< aOlLi.length; i++){
+        aOlLi[i].index = i;
+        aOlLi[i].onmouseover = function(){
+            iNow = this.index;
+            move();
+        };
+    }
+
+    function move(){
+        for(var i = 0; i< aOlLi.length; i++){
+            aOlLi[i].className = "";
+        }
+        aOlLi[iNow].className = "active";
+        startMove(oUl,{"top":-iNow * oUlLiWid});
+        iNow ++;
+        if(iNow == aOlLi.length){
+            iNow = 0;
+        }
+    }
+
+    var timer = null;
+    timer = setInterval(move,2000); -->
