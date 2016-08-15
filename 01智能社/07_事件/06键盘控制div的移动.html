@@ -17,22 +17,63 @@
     <script>
         var oDiv = document.getElementById("div1");
 
+        // document.onkeydown = function(ev){
+        //     var oEvent = ev || event;
+
+        //     if(oEvent.keyCode == 37){
+        //         oDiv.style.left = oDiv.offsetLeft - 10 + "px";
+        //     }
+        //     else if(oEvent.keyCode == 39){
+        //         oDiv.style.left = oDiv.offsetLeft + 10 + "px";
+        //     }
+        //     else if(oEvent.keyCode == 38){
+        //         oDiv.style.top = oDiv.offsetTop - 10 + "px";
+        //     }
+        //     else if(oEvent.keyCode == 40){
+        //         oDiv.style.top = oDiv.offsetTop + 10 + "px";
+        //     }
+        // };
+
+        // var timer = null;
+        // document.onkeydown = function(ev){
+        //     var oEvent = ev || event;
+        //     //clearInterval(timer);
+        //     if(!timer){
+        //         timer = setInterval(show,30);
+        //         //console.log(timer);1
+        //     }
+        //     function show(){
+        //         if(oEvent.keyCode == 39){
+        //             oDiv.style.left = oDiv.offsetLeft + 10 + "px";
+        //         }
+        //         else if(oEvent.keyCode == 37){
+        //             oDiv.style.left = oDiv.offsetLeft - 10 + "px";
+        //         }
+        //     }
+        // };
+        // document.onkeyup = function(){
+        //     timer = clearInterval(timer);//undefined
+        //     //timer = null;
+        // };
+
+        var timer = null;
         document.onkeydown = function(ev){
             var oEvent = ev || event;
-
-            if(oEvent.keyCode == 37){
-                oDiv.style.left = oDiv.offsetLeft - 10 + "px";
-            }
-            else if(oEvent.keyCode == 39){
-                oDiv.style.left = oDiv.offsetLeft + 10 + "px";
-            }
-            else if(oEvent.keyCode == 38){
-                oDiv.style.top = oDiv.offsetTop - 10 + "px";
-            }
-            else if(oEvent.keyCode == 40){
-                oDiv.style.top = oDiv.offsetTop + 10 + "px";
+            clearInterval(timer);
+            timer = setInterval(show,30);
+            function show(){
+                if(oEvent.keyCode == 39){
+                    oDiv.style.left = oDiv.offsetLeft + 10 + "px";
+                }
+                else if(oEvent.keyCode == 37){
+                    oDiv.style.left = oDiv.offsetLeft - 10 + "px";
+                }
             }
         };
+        document.onkeyup = function(){
+            clearInterval(timer);
+        };
+
     </script>
 </body>
 </html>
