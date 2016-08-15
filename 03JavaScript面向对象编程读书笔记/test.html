@@ -6,9 +6,12 @@
 </head>
 <body>
     <script>
-        
-        var arr = [1,23];
-        console.log(typeof arr.toString());
+    String.prototype.reverse = function(){
+        //return Array.prototype.reverse.apply(this.split("")).join("");
+        return this.split("").reverse().join("");
+    };
+    var name = "yangkang";
+    console.log(name.reverse());
     </script>
 </body>
 </html>

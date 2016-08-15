@@ -168,7 +168,7 @@
         createEnemy : function(iNow){//敌人的创建
             if(this.oUl){//创建之前先删，防止开始下一关时的问题
                 clearInterval(this.oUl.timer);//删之前清定时器
-                this.oParent.removeChild();
+                this.oParent.removeChild(this.oUl);
             }
             document.title = "第" + (iNow + 1) + "关";
 

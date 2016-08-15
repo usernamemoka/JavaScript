@@ -302,6 +302,18 @@ alert(obj);obj对象自动调用toString()方法
 // console.log(arr[0]());
 
 
+//每个对象都有属于自己的构造器属性，其所引用的就是用于创建该对象的那个函数
+Person.constructor.prototype.show
+//每个对象都有自己的构造器属性，而原型本身也是一个对象，这意味着它必须有一个构造器，而这个构造器又会有自己的原型
+Person.constructor.prototype.constructor.prototype...
+
+hasOwnProperty('name')//对象属性和原型属性的判断
+
+String.prototype.reverse = function(){
+    //return Array.prototype.reverse.apply(this.split("")).join("");
+    //return this.split("").reverse().join("");
+    Array.prototype.reverse.apply(this.split("")) == this.split("").reverse()
+};
 
 
 </script>
