@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: url(./1.jpg) no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">fdfdsf</div>
+    <script>
+    //ie8选中文字后再拖拽的问题
+    window.onload = function(){
+        var oDiv = document.getElementById("div1");
+        var disX = 0;
+        var disY = 0;
+
+        oDiv.onmousedown = function(ev){
+            var oEvent = ev || event;
+            disX = oEvent.clientX - oDiv.offsetLeft;
+            disY = oEvent.clientY - oDiv.offsetTop;
+            if(oDiv.setCapture){
+                oDiv.setCapture();
+            }
+            document.onmousemove = function(ev){
+                var oEvent = ev || event;
+                oDiv.style.left = oEvent.clientX - disX + "px";
+                oDiv.style.top = oEvent.clientY - disY + "px";
+            };
+            document.onmouseup = function(){
+                document.onmousemove = document.onmouseup = null;
+                if(oDiv.releaseCapture){
+                    oDiv.releaseCapture();
+                }
+            };
+            return false;
+        };
+    };
+    
+    </script>
+</body>
+</html>

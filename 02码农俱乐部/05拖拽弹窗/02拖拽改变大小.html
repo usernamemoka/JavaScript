@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #div1{
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: absolute;
+    }
+    #div2{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: green;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <div id="div2"></div>
+    </div>
+    <script>
+    var oDiv1 = document.getElementById("div1");
+    var oDiv2 = document.getElementById("div2");
+
+    var disX = 0;
+    var disY = 0;
+    var disW = 0;
+    var disH = 0;
+
+    oDiv2.onmousedown = function(ev){
+        var oEvent = ev || event;
+        disX = oEvent.clientX;
+        disY = oEvent.clientY;
+        disW = oDiv1.offsetWidth;
+        disH = oDiv1.offsetHeight;
+
+        document.onmousemove = function(ev){
+            var oEvent = ev || event;
+            var W = disW + oEvent.clientX - disX;
+            var H = disH + oEvent.clientY - disY;
+            if(W < 100){
+                W = 100;
+            }
+            if(H < 100){
+                H = 100;
+            }
+            oDiv1.style.width = W + "px";
+            oDiv1.style.height = H + "px";
+        };
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        };
+    };
+
+    </script>
+</body>
+</html>
