@@ -6,8 +6,31 @@
 </head>
 <body>
     <script>
-    
-
+    function setCookie(name,value,iDay){
+		var oDate = new Date();
+		oDate.setDate(oDate.getDate() + iDay);
+		document.cookie = name + "=" + value + ";expires=" + oDate;
+	}
+	
+	function getCookie(name){
+		var arr1 = document.cookie.split("; ");//假如开始只有一个cooke:name=yangk,拆分后依然是["name=yangk"]
+		for(var i = 0; i < arr1.length; i++){
+			var arr2 = arr1[i].split("=");
+			if(arr2[0] == name){
+				return arr2[1];
+			}
+		}
+		return "没找到！";		
+	}
+	
+	function removeCookie(name){
+		setCookie(name,1,-1);
+	}
+	setCookie("name","yangk","1");
+	setCookie("age","24","1");
+	console.log(document.cookie);
+	console.log(getCookie("age"));
+	
     </script>
 </body>
 </html>

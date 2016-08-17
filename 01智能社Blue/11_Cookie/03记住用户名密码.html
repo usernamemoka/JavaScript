@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+
+</style>
+</head>
+
+<body>
+	<form id="form1">
+    姓名：<input type="text" / id="txt1">
+    密码：<input type="password" / id="txt2">
+    <input type="submit" />
+    </form>
+    <script>
+	function setCookie(name,value,iDay){
+		var oDate = new Date();
+		oDate.setDate( oDate.getDate() + iDay );
+		document.cookie = name + "=" + value + ";expires=" + oDate;
+	}
+	function getCookie(name){ 
+		var arr1 = document.cookie.split("; ");
+		for(var i = 0;i < arr1.length; i++){ 
+			var arr2 = arr1[i].split("=");
+			if( arr2[0] == name ){ 
+				return arr2[1];
+			}
+		}
+		return "没找到！";
+	}
+	function removeCookie(name){ 
+		setCookie(name,1,-1);
+	}
+	
+    var oForm = document.getElementById("form1");
+	var oTxt1 = document.getElementById("txt1");
+	var oTxt2 = document.getElementById("txt2");
+	
+	oForm.onsubmit = function(){
+		var oTxt1Value = oTxt1.value;
+		var oTxt2Value = oTxt2.value;
+		
+		setCookie("name",oTxt1Value,2);
+		setCookie("pass",oTxt2Value,2);
+		
+	};
+	oTxt1.value = getCookie("name");
+	oTxt2.value = getCookie("pass");
+    </script>
+</body>
+</html>
