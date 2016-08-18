@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style-type: none;
+    }
+    #wrap{
+        margin: 50px auto 0;
+        width: 350px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+    }
+    #ul1{
+        position: absolute;
+    }
+    #ul1 li{
+        width: 350px;
+        height: 100px;
+        overflow: hidden;
+    }
+    #ol1{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+    #ol1 li{
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        display: inline-block;
+        background-color: green;
+        color: #fff;
+        text-align: center;
+    }
+    #ol1 .active{
+        background-color: yellow;
+        color: #333;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="ul1">
+            <li>
+                <img src="./images/1.png" height="100" width="350" alt="">
+            </li>
+            <li>
+                <img src="./images/2.png" height="100" width="350" alt="">
+            </li>
+            <li>
+                <img src="./images/3.png" height="100" width="350" alt="">
+            </li>
+            <li>
+                <img src="./images/4.png" height="100" width="350" alt="">
+            </li>
+        </ul>
+        <ol id="ol1">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>
+    </div>
+    <script src="./js/move.js"></script>
+    <script>
+    var oWrap = document.getElementById("wrap");
+    var oUl = document.getElementById("ul1");
+    var oOl = document.getElementById("ol1");
+    var aUlLi = oUl.getElementsByTagName("li");
+    var aOlLi = oOl.getElementsByTagName("li");
+
+    var oUlLiHig = aUlLi[0].offsetHeight;
+    var timer = null;
+    var iNow1 = 0;//控制按钮
+    var iNow2 = 0;//控制图片
+
+    for(var i = 0;i < aOlLi.length; i++){
+        aOlLi[i].index = i;
+        aOlLi[i].onmouseover = function(){
+            if(this.index == 0){//判断不可少
+                aUlLi[0].style.position = "static";//这里要加上，不然当aUlLi[0]为relative，top：400时，此时移入会有问题
+            }
+            iNow1 = iNow2 = this.index;
+            move();
+        };
+    }
+    function move(){
+        for(var i = 0;i < aOlLi.length; i++){
+            aOlLi[i].className = "";
+        }
+        aOlLi[iNow1].className = "active";
+        startMove(oUl,{"top":- iNow2 * oUlLiHig});
+    }
+
+    timer = setInterval(change,1000);
+
+    function change(){
+        if(iNow1 == 0){
+            aUlLi[0].style.position = "static";
+            oUl.style.top = 0;
+            iNow2 = 0;
+        }
+        if(iNow1 == aOlLi.length-1){
+            iNow1 = 0;
+            aUlLi[0].style.position = "relative";
+            aUlLi[0].style.top = aUlLi.length * oUlLiHig + "px";
+        }
+        else{
+            iNow1 ++;
+        }
+        iNow2 ++;
+        move();
+    }
+
+    oWrap.onmouseover = function(){
+        clearInterval(timer);
+    };
+    oWrap.onmouseout = function(){
+        timer = setInterval(change,1000);
+    };
+
+
+    </script>
+</body>
+</html>

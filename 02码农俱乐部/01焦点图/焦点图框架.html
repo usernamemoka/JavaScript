@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style-type: none;
+    }
+    #wrap{
+        margin: 50px auto 0;
+        width: 350px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+    }
+    #ul1{
+        position: absolute;
+    }
+    #ul1 li{
+        width: 350px;
+        height: 100px;
+        overflow: hidden;
+    }
+    #ol1{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+    #ol1 li{
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        display: inline-block;
+        background-color: green;
+        color: #fff;
+        text-align: center;
+    }
+    #ol1 .active{
+        background-color: yellow;
+        color: #333;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="ul1">
+            <li>
+                <img src="./images/1.png" height="100" width="350" alt="">
+            </li>
+            <li>
+                <img src="./images/2.png" height="100" width="350" alt="">
+            </li>
+            <li>
+                <img src="./images/3.png" height="100" width="350" alt="">
+            </li>
+            <li>
+                <img src="./images/4.png" height="100" width="350" alt="">
+            </li>
+        </ul>
+        <ol id="ol1">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>
+    </div>
+    <script src="./js/move.js"></script>
+    <script>
+
+    function FocusImg(id){
+        this.oWrap = document.getElementById(id);
+        this.oUl = this.oWrap.getElementsByTagName("ul")[0];
+        this.oOl = this.oWrap.getElementsByTagName("ol")[0];
+        this.aUlLi = this.oUl.getElementsByTagName("li");
+        this.aOlLi = this.oOl.getElementsByTagName("li");
+        this.oUlLiHig = this.aUlLi[0].offsetHeight;
+        this.timer = null;
+        this.iNow1 = 0;
+        this.iNow2 = 0;
+    }
+
+    FocusImg.prototype.init = function(){
+        var This = this;
+        for(var i = 0;i < this.aOlLi.length;i++){
+            this.aOlLi[i].index = i;
+            this.aOlLi[i].onmouseover = function(){
+                if(this.index == 0){
+                    This.aUlLi[0].style.position = "static";
+                }
+                This.iNow1 = This.iNow2 = this.index;
+                This.move();
+            };
+        }
+        this.startTime();//定时运动
+        this.oWrap.onmouseover = function(){
+            This.mouseOver();
+        };
+        this.oWrap.onmouseout = function(){
+            This.mouseOut();
+        };
+    };
+    FocusImg.prototype.move = function(){
+        for(var i = 0;i < this.aOlLi.length;i++){
+            this.aOlLi[i].className = "";
+        }
+        this.aOlLi[this.iNow1].className = "active";
+        startMove(this.oUl,{"top": - this.iNow2 * this.oUlLiHig});
+    };
+    FocusImg.prototype.startTime = function(){
+        var This = this;
+        this.timer = setInterval(function(){
+            This.change();
+        },1000);
+    };
+    FocusImg.prototype.change = function(){
+        if(this.iNow1 == 0){
+            this.aUlLi[0].style.position = "static";
+            this.oUl.style.top = 0;
+            this.iNow2 = 0;
+        }
+        if(this.iNow1 == this.aOlLi.length - 1){
+            this.iNow1 = 0;
+            this.aUlLi[0].style.position = "relative";
+            this.aUlLi[0].style.top = this.aUlLi.length * this.oUlLiHig + "px";
+        }
+        else{
+            this.iNow1 ++;
+        }
+        this.iNow2 ++;
+        this.move();
+    };
+    FocusImg.prototype.mouseOver = function(){
+        clearInterval(this.timer);
+    };
+    FocusImg.prototype.mouseOut = function(){
+        var This = this;
+        this.timer = setInterval(function(){
+            This.change();
+        },1000);
+    };
+
+
+
+
+    var focus1 = new FocusImg("wrap");
+    focus1.init();//顺序
+
+    </script>
+</body>
+</html>
