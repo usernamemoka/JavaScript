@@ -23,7 +23,33 @@
 
 //解除一个值的引用并不意味着自动回收该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。
 
-//
+var person = {};
+// Object.defineProperty(person,"name",{
+//     configurable : true,//delete是否能删除
+//     enumerable : true,//能否for in
+//     writable : true,//能否修改属性的值
+//     value : undefined
+// });
+Object.defineProperty(person,"name",{//在调用Object.defineProperty()方法时，如果不指定，configurable、enumerable 和writable 特性的默认值都是false
+    "value" : "yangk"
+});
+person.name = "jiangjun";
+console.log(person.name);
+
+//person1.constructor == Person
+function Person(name){
+    this.name = name;
+}
+
+var o = new Object();
+Person.call(o,"yangk");
+console.log(o.name);
+
+
+//要明确的真正重要的一点就是__proto__连接存在于实例与构造函数的原型对象之间，而不是存在于实例与构造函数之间
+
+
+
 </script>
 </body>
 </html>
