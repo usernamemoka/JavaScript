@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #wrap .bot div{
+            width: 150px;
+            height: 150px;
+            border: 1px solid red;
+            display: none;
+        }
+        #wrap .on{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="top">
+            <input class="on" type="button" value="教育">
+            <input type="button" value="出国">
+            <input type="button" value="旅游">
+        </div>
+        <div class="bot">
+            <div style="display:block;">教育...</div>
+            <div>出国...</div>
+            <div>旅游...</div>
+        </div>
+    </div>
+    <script src="VQuery.js"></script>
+    <script>
+    $("input").click(function(){
+        $("input").attr('className','');
+        $(this).attr('className','on');
+        $('.bot').find('div').hide();
+        $('.bot').find('div').eq($(this).index()).show();
+    });
+
+    </script>
+</body>
+</html>

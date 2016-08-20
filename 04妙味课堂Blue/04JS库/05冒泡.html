@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            padding: 50px;
+        }
+        #div1{
+            background-color: red;
+        }
+        #div2{
+            background-color: green;
+        }
+        #div3{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" onclick = "alert('red');">
+        <div id="div2" onclick = "alert('green');">
+            <div id="div3"></div>
+        </div>
+    </div>
+    <script src="VQuery.js"></script>
+    <script>
+        $("#div3").click(function(){
+            alert(1);
+            return false;
+        });
+    </script>
+</body>
+</html>

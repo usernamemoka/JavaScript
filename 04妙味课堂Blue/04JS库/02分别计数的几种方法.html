@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="aaa">
+    <input type="button" value="bbb">
+    <input type="button" value="ccc">
+    <input type="button" value="ddd">
+    <script>
+    var aInput = document.getElementsByTagName("input");
+    // for(var i = 0;i < aInput.length;i++){
+    //     aInput[i].count = 0;//分别置为0
+    //     aInput[i].onclick = function(){
+    //         alert(this.count++);
+    //     };
+    // }
+
+    for(var i = 0; i < aInput.length; i++){
+        addClick(aInput[i]);
+    }
+    function addClick(obj){
+        var count = 0;
+        obj.onclick = function(){
+            alert(count++);
+        };
+    }
+
+    // for(var i = 0; i < aInput.length; i++){
+    //     (function(obj){
+    //         var count = 0;
+    //         obj.onclick = function(){
+    //             alert(count++);
+    //         };
+    //     })(aInput[i]);
+    // }
+
+    // for(var i = 0; i < aInput.length; i++){
+    //     aInput[i].onclick = (function(count){
+    //         return function(){
+    //             alert(count++);
+    //         }
+    //     })(0);
+    // }
+    </script>
+</body>
+</html>
