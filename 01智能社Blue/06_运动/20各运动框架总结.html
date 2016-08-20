@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #div1{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .line{
+        width: 1px;
+        height: 500px;
+        position: absolute;
+        top: 0;
+        left: 500px;
+        background-color: #333;
+    }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div class="line"></div>
+    <script>
+    //匀速运动
+    // function StartMove1(id,iTarget){
+    //     this.oDiv = document.getElementById(id);
+    //     this.speed = 0;
+    //     this.timer = null;        
+    //     clearInterval(this.timer);
+    //     if(iTarget > this.oDiv.offsetLeft){
+    //         this.speed = 7;
+    //     }
+    //     else{
+    //         this.speed = -7;
+    //     }
+    //     var This = this;
+    //     this.timer = setInterval(function(){
+    //         if(Math.abs(iTarget - This.oDiv.offsetLeft) < 7){
+    //             clearInterval(This.timer);
+    //             This.oDiv.style.left = iTarget + "px";
+    //         }
+    //         else{
+    //             This.oDiv.style.left = This.oDiv.offsetLeft + This.speed + "px";
+    //         }
+    //     },30);
+    // }
+    //new StartMove1("div1",500);
+
+    //弹性运动!!!
+    // function StartMove2(id,iTarget){
+    //     this.timer = null;
+    //     this.speed = 0;
+    //     this.oDiv = document.getElementById(id);
+    //     clearInterval(this.timer);
+    //     var This = this;
+    //     this.timer = setInterval(function(){
+    //         This.speed += (iTarget - This.oDiv.offsetLeft) / 5;//step1
+    //         This.speed *= 0.7;//step2
+    //         if(Math.abs(This.speed) < 1 && Math.abs(iTarget-This.oDiv.offsetLeft) < 1){//step3
+    //             clearInterval(This.timer);
+    //             This.speed = 0;
+    //         }
+    //         else{
+    //             This.oDiv.style.left = This.oDiv.offsetLeft + This.speed + "px";
+    //         }
+    //     },30);
+    // }
+    // new StartMove2("div1",500);
+
+    //重力
+    // function StartMove3(){
+    //     this.oDiv = document.getElementById("div1");
+    //     this.oWinHeight = document.documentElement.clientHeight - this.oDiv.offsetHeight;
+    //     this.oT = 0;
+    //     this.timer = null;
+    //     this.speed = 0;
+    //     this.iNum = 0;//计数判断何时清除定时器
+    //     clearInterval(this.timer);
+    //     var This = this;
+    //     this.timer = setInterval(function(){
+    //         This.speed += 3;//step1：加速度
+    //         This.oT = This.oDiv.offsetTop + This.speed;
+    //         if(This.oT > This.oWinHeight){
+    //             This.iNum ++;
+    //             if(This.iNum == 6){
+    //                 clearInterval(This.timer);
+    //             }
+    //             This.oT = This.oWinHeight;
+    //             This.speed *= -1;//step2：变方向
+    //             This.speed *= 0.75;//step3：摩擦力
+    //             console.log(This.speed);
+    //         }
+    //         This.oDiv.style.top = This.oT + "px";
+    //     },30);
+    // }
+    // new StartMove3();
+
+    //缓冲
+    function StartMove4(iTarget){
+        this.oDiv = document.getElementById("div1");
+        this.timer = null;
+        var This = this;
+        clearInterval(this.timer);
+        this.timer = setInterval(function(){
+            var speed = (iTarget - This.oDiv.offsetLeft) / 7;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            if(Math.abs(speed) < 1){
+                clearInterval(This.timer);
+            }
+            else{
+                This.oDiv.style.left = This.oDiv.offsetLeft + speed + "px";
+            }
+        },30);
+    }
+    new StartMove4(500);
+
+    </script>
+</body>
+</html>

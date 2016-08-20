@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //person1.constructor == Person
+    function Person(name){
+        this.name = name;
+    }
+
+    var o = new Object();
+    Person.call(o,"yangk");
+    console.log(o.name);
+    </script>
+</body>
+</html>
