@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    img{
+        width: 640px;
+        height: 378px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -189px;
+        margin-left: -320px;
+    }
+    </style>
+</head>
+<body>
+    <img src="img/miaov (0).jpg" alt="" id="img1">
+    <script>
+    var x = 0;
+    var oImg = document.getElementById("img1");
+    var aImg = document.getElementsByTagName("img");
+    var oLastImg = oImg;
+    var lastX = 0;
+    var iSpeed = 0;
+    var timer = null;
+
+    for(var i = 1;i < 77;i ++){
+        (function(oNewImg){
+            var oImg = new Image();
+            oImg.onload = function(){
+                oNewImg.src = this.src;
+            };
+            oImg.src = 'img/miaov ('+ i +').jpg';
+            oNewImg.style.display = "none";//ie9显示才加载，导致开始有点闪
+            document.body.appendChild(oNewImg);
+        })(document.createElement("img"));
+    }
+    document.onmousedown = function(ev){
+        var oEvent = ev || event;
+        var disX = oEvent.clientX - x;
+        clearInterval(timer);
+        console.log(disX + ":" + x);
+        document.onmousemove = function(ev){
+            var oEvent = ev || event;
+            x = oEvent.clientX - disX;//第一次往左走是负的了，往右走一样
+            move();
+            iSpeed = x - lastX;//速度
+            lastX = x;
+
+            return false;
+        };
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+            timer = setInterval(function(){
+                x += iSpeed;
+                move();
+            },30);
+        };
+        function move(){
+            if(iSpeed > 0){
+                iSpeed --;
+            }
+            else{
+                iSpeed ++;
+            }
+            
+            if(iSpeed == 0){
+                clearInterval(timer);
+            }
+            var l = parseInt(- x / 10);//x全都取负，左拖左走。每拖10个px走一张图
+            if(l > 0){
+                l = l % 77;
+            }
+            else{
+                l += - Math.floor(l / 77) * 77;
+            }
+            document.title = l;
+            if(oLastImg != aImg[l]){
+                oLastImg.style.display = "none";
+                aImg[l].style.display = "block";
+                oLastImg = aImg[l];
+            }
+            //oImg.src = 'img/miaov ('+ l +').jpg';//0 - 76
+        }
+        return false;
+    };
+    </script>
+</body>
+</html>
