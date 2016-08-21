@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    /*不用麻烦设置left，top等值*/
+    .wrap{
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        padding: 200px;
+        border: 1px solid #333;
+        perspective: 800px;/*!!!*/
+    }
+    .box{
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;/*!!!*/
+        transition: 3s all;
+        transform: translateZ(-100px) rotateX(0);
+    }
+    .box div{
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        color: #fff;
+        position: absolute;
+        font-size: 100px;
+        text-align: center;
+    }
+    .box div:nth-of-type(1){
+        background-color: red;
+        transform: translateZ(100px);
+    }
+    .box div:nth-of-type(2){
+        background-color: blue;
+        transform-origin: top;
+        transform: translateZ(-100px) rotateX(90deg);
+    }
+    .box div:nth-of-type(3){
+        background-color: yellow;
+        transform: translateZ(-100px) rotateX(180deg);
+    }
+    .box div:nth-of-type(4){
+        background-color: green;
+        transform-origin: bottom;
+        transform: translateZ(-100px) rotateX(-90deg);
+    }
+    .wrap:hover .box{
+        transform: translateZ(-100px) rotateX(270deg);
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="box">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </div>
+</body>
+</html>

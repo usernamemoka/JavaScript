@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .wrap{
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        padding: 200px;
+        border: 1px solid #333;
+        perspective: 800px;/*!!!*/
+    }
+    .box{
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;/*!!!*/
+        transition: 3s all;
+        transform: translateZ(-100px) rotateX(0);
+    }
+    .box div{
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        color: #fff;
+        position: absolute;
+        font-size: 100px;
+        text-align: center;
+    }
+    .box div:nth-of-type(1){
+        background-color: red;
+        top: -200px;
+        left: 0;
+        transform-origin: bottom;
+        transform: translateZ(100px) rotateX(90deg);/*translateZ(100px)刚好Z轴为0围绕中心点转，往前移动会变大*/
+    }
+    .box div:nth-of-type(2){
+        background-color: blue;
+        top: 0;
+        left: -200px;
+        transform-origin: right;
+        transform: translateZ(100px) rotateY(-90deg);
+    }
+    .box div:nth-of-type(3){
+        background-color: yellow;
+        top: 0;
+        left: 0;
+        transform: translateZ(100px);
+    }
+    .box div:nth-of-type(4){
+        background-color: green;
+        top: 0;
+        left: 200px;
+        transform-origin: left;
+        transform: translateZ(100px) rotateY(90deg);
+    }
+    .box div:nth-of-type(5){
+        background-color: pink;
+        top: 200px;
+        left: 0;
+        transform-origin: top;
+        transform: translateZ(100px) rotateX(-90deg);
+    }
+    .box div:nth-of-type(6){
+        background-color: #f60;
+        top: 0;
+        left: 0;
+        transform: translateZ(-100px) rotateX(180deg);/*rotateX扭正位置*/
+    }
+    .wrap:hover .box{
+        transform: translateZ(-100px) rotateX(180deg);
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="box">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+        </div>
+    </div>
+</body>
+</html>
