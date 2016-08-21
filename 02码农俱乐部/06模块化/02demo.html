@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/sea.js"></script>
+    <script>
+    //seajs.user:页面调用模块，参数1：地址，参数2：地址加载成功后的回调函数
+    //seajs的默认根目录：sea/js
+    seajs.use('./js/test1.js',function(ex){//毁掉的参数就是模块的exports
+        //alert(123);
+        ex.tab();//很好的避免了命名冲突
+        function tab(){
+            alert("没影响");
+        }
+        tab();
+    });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
