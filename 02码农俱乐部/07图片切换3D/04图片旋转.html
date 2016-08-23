@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style id="css">
+    .box{
+        width: 800px;
+        margin: 30px auto 0;
+    }
+    #picList{
+        margin: 0;
+        padding: 0;
+        height: 360px;
+        perspective: 800px;
+        /*perspective-origin: left;*//* 最左边看，默认#picList的中间 */
+    }
+    #picList li{
+        width: 25px;
+        height: 360px;
+        position: relative;
+        list-style-type: none;
+        float: left;
+        transform-style: preserve-3d;/*!!!*/
+        transform: translateZ(-180px) rotateX(0);
+    }
+    #picList a{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #picList a:nth-of-type(1){
+        background: url(./images/1.jpg) no-repeat;
+        transform: translateZ(180px);
+    }
+    #picList a:nth-of-type(2){
+        background: url(./images/2.jpg) no-repeat;
+        transform-origin: top;
+        transform: translateZ(-180px) rotateX(90deg);
+    }
+    #picList a:nth-of-type(3){
+        background: url(./images/3.jpg) no-repeat;
+        transform: translateZ(-180px) rotateX(180deg);
+    }
+    #picList a:nth-of-type(4){
+        background: url(./images/4.jpg) no-repeat;
+        transform-origin: bottom;
+        transform: translateZ(-180px) rotateX(-90deg);
+    }
+    
+    #picList span{
+        width: 360px;
+        height: 360px;
+        background-color: #333;
+        position: absolute;
+        top: 0;
+    }
+    #picList span:nth-of-type(1){
+        left: 0;
+        transform-origin: left;
+        transform: translateZ(180px) rotateY(90deg);
+    }
+    #picList span:nth-of-type(2){
+        right: 0;
+        transform-origin: right;
+        transform: translateZ(180px) rotateY(-90deg);
+    }
+
+    #btns{
+        padding: 50px;
+        height: 30px;
+    }
+    #btns li{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin: 10px;
+        float: left;
+        border-radius: 50%;
+        background-color: #ccc;
+        font-size: 16px;
+        color: #fff;
+        list-style-type: none;
+        cursor: pointer;
+    }
+    #btns .active{
+        background-color: #f60;
+    }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul id="picList">
+            <li><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a><span></span><span></span></li>
+        </ul>
+        <ol id="btns">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>
+    </div>
+    <script>
+    // 过半时层级问题
+    var oPicList = document.getElementById("picList");
+    var oCss = document.getElementById("css");
+
+    var iLiW = 25;
+    var sHtml = "";
+    var sStyle = "";
+    var iZindex = 0;
+    var iLength = oPicList.offsetWidth / 25;
+    for(var i = 0;i < iLength; i++){
+        i > iLength / 2 ? iZindex-- : iZindex++;
+
+        sStyle += "#picList li:nth-of-type("+(i + 1)+"){z-index: "+ iZindex +";}";//设置li
+        sStyle += "#picList li:nth-of-type("+(i + 1)+") a{background-position: -"+ i * iLiW +"px 0;}";//设置a
+        sHtml += '<li><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a><span></span><span></span></li>';
+    }
+    oPicList.innerHTML = sHtml;//不要appendChild啊
+    oCss.innerHTML += sStyle;
+
+    var iNow = 0;
+    var aPicLi = oPicList.getElementsByTagName("li");
+    var aBtns = document.getElementById("btns").getElementsByTagName("li");
+    for(var i = 0; i < aBtns.length; i++){
+        aBtns[i].onclick = (function(a){
+            return function(){
+                aBtns[iNow].className = "";
+                aBtns[a].className = "active";
+                for(var i = 0; i < aPicLi.length;i++){
+                    with(aPicLi[i].style){
+                        transition = 0.5 * Math.abs(iNow - a) + "s "+ i * 50 +"ms all ease-in-out";//0.5 * Math.abs(iNow - a)解决跳跃翻转翻转多张时翻转速度过快
+                        transform = "translateZ(-180px) rotateX("+ -a * 90 +"deg)";
+                    }
+                }
+                iNow = a;
+            }
+        })(i);
+    }
+
+    //http://www.uemo.net/      demo
+    </script>
+</body>
+</html>
