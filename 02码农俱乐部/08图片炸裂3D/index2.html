@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .list{
+        margin: 0;
+        padding: 0;
+        width: 600px;
+        height: 420px;
+        margin: 50px auto 0;
+    }
+    .list li{
+        list-style: none;
+        width: 58px;
+        height: 58px;
+        border: 1px solid #000;
+        float: left;
+        background-color: red;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var oList = document.getElementById("list");
+        var aLi = oList.getElementsByTagName("li");
+        var iRows = oList.offsetHeight / aLi[0].offsetHeight;
+        var iCeils = oList.offsetWidth / aLi[0].offsetWidth;
+        var aInput = document.getElementsByTagName("input");
+        var oXyLi = setXy(aLi,iRows,iCeils);
+
+        aInput[0].onclick = function(){
+            tab(oXyLi,iCeils-1,iRows-1,function(){
+                this.style.background = "yellow";
+            },50,-1,-1);
+        };
+        aInput[1].onclick = function(){
+            tab(oXyLi,0,0,function(){
+                this.style.background = "red";
+            },50,1,1);
+        };
+
+        for(var i = 0 ; i < aLi.length; i++){
+            aLi[i].onclick = function(){
+                //alert(this.xIndex + "||" + this.yIndex);
+            };
+        }
+        //oXyLi[2][3].style.backgroundColor = "yellow";
+    };
+    function tab(arr,x,y,fn,iDelay,iSpeedX,iSpeedY){
+        if(!arr[y] || !arr[y][x]){
+            return false;
+        }
+        if(fn){
+            fn.call(arr[y][x]);
+            clearTimeout(arr[y][x].timer);
+            arr[y][x].timer = setTimeout(function(){//延时
+                tab(arr,x,y + iSpeedY,fn,iDelay,iSpeedX,iSpeedY);
+                tab(arr,x + iSpeedX,y,fn,iDelay,iSpeedX,iSpeedY);
+            },iDelay);
+        }
+    }
+    function setXy(objs,iRows,iCeils){
+        var arr = [];
+        for(var i = 0; i < iRows; i++){
+            var arr2 = [];
+            for(var j = 0;j < iCeils; j++){
+                objs[i * iCeils + j].xIndex = j;
+                objs[i * iCeils + j].yIndex = i;
+                arr2.push(objs[i * iCeils + j]);
+            }
+            arr.push(arr2);
+        }
+        return arr;
+    }
+    </script>
+</head>
+<body>
+    <input type="button" value="展开">
+    <input type="button" value="重置">
+    <ul class="list" id="list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+    </ul>
+</body>
+</html>
