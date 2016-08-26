@@ -1,1 +1,257 @@
-index4.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .list{
+        margin: 0;
+        padding: 0;
+        width: 600px;
+        height: 420px;
+        margin: 50px auto 0;
+    }
+    .list li{
+        list-style: none;
+        width: 58px;
+        height: 58px;
+        line-height: 58px;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid #000;
+        float: left;
+        background-color: red;
+    }
+    </style>
+    <script>
+    /*10 * 7*/
+    window.onload = function(){
+        var oList = document.getElementById("list");
+        var aLi = oList.getElementsByTagName("li");
+        var iRows = oList.offsetHeight / aLi[0].offsetHeight;
+        var iCeils = oList.offsetWidth / aLi[0].offsetWidth;
+        var aInput = document.getElementsByTagName("input");
+        var oXyLi = setXy(aLi,iRows,iCeils);//得到一个二维数组
+
+
+        aInput[0].onclick = function(){
+            //二维数组、列、行、fn、延迟、x、y
+            tab(oXyLi,iCeils-1,iRows-1,function(){
+                this.style.background = "yellow";
+            },50,-1,-1);
+        };
+        aInput[1].onclick = function(){
+            tab(oXyLi,0,0,function(){
+                this.style.background = "red";
+            },50,1,1);
+        };
+
+        for(var i = 0 ; i < aLi.length; i++){
+            aLi[i].onclick = function(){
+                //alert(this.xIndex + "||" + this.yIndex);
+            };
+        }
+        //oXyLi[2][3].style.backgroundColor = "yellow";
+
+        for(var i = 0; i < 7 ; i ++){
+            for(var j = 0; j < 10 ; j ++){
+                aLi[i * 10 + j].innerHTML = j + "||" + i;
+            }
+        }
+
+    };
+    function tab(arr,x,y,fn,iDelay,iSpeedX,iSpeedY){
+        if(!arr[y] || !arr[y][x]){
+            return false;
+        }
+        if(fn){
+            fn.call(arr[y][x]);
+            clearTimeout(arr[y][x].timer);
+            arr[y][x].timer = setTimeout(function(){//延时
+                console.log( x + "||" + y );
+                tab(arr,x,y + iSpeedY,fn,iDelay,iSpeedX,iSpeedY);
+                tab(arr,x + iSpeedX,y,fn,iDelay,iSpeedX,iSpeedY);
+
+
+            },iDelay);
+        }
+    }
+    function setXy(objs,iRows,iCeils){
+        var arr = [];
+        for(var i = 0; i < iRows; i++){
+            var arr2 = [];
+            for(var j = 0;j < iCeils; j++){
+                objs[i * iCeils + j].xIndex = j;
+                objs[i * iCeils + j].yIndex = i;
+                arr2.push(objs[i * iCeils + j]);
+            }
+            arr.push(arr2);
+        }
+        return arr;
+    }
+
+// 第一次传参进来 9 6 作为两个tab的参数输出 9 6
+
+// 调用第一个函数得到 9 5
+
+// 调用第二个函数得到 8 6
+
+// 上次调用的第一个函数又会调用调用两个函数： 9 4
+// 9||6
+// 9||5
+// 8||6
+// 9||4
+// 8||5
+// 7||6
+// 9||3
+// 8||4
+// 7||5
+// 6||6
+// 9||2
+// 8||3
+// 7||4
+// 6||5
+// 5||6
+// 9||1
+// 8||2
+// 7||3
+// 6||4
+// 5||5
+// 4||6
+// 9||0
+// 8||1
+// 7||2
+// 6||3
+// 5||4
+// 4||5
+// 3||6
+// 8||0
+// 7||1
+// 6||2
+// 5||3
+// 4||4
+// 3||5
+// 2||6
+// 7||0
+// 6||1
+// 5||2
+// 4||3
+// 3||4
+// 2||5
+// 1||6
+// 6||0
+// 5||1
+// 4||2
+// 3||3
+// 2||4
+// 1||5
+// 0||6
+// 5||0
+// 4||1
+// 3||2
+// 2||3
+// 1||4
+// 0||5
+// 4||0
+// 3||1
+// 2||2
+// 1||3
+// 0||4
+// 3||0
+// 2||1
+// 1||2
+// 0||3
+// 2||0
+// 1||1
+// 0||2
+// 1||0
+// 0||1
+// 0||0
+    </script>
+</head>
+<body>
+    <input type="button" value="展开">
+    <input type="button" value="重置">
+    <ul class="list" id="list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+    </ul>
+</body>
+</html>
