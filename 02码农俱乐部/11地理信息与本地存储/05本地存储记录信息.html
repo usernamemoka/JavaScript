@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p>用户名：<input type="text"></p>
+    <p>性别：<input type="radio" name="sex" value="男" id="">
+             <input type="radio" name="sex" value="女" id=""></p>
+    <p>内容：<textarea name="" id="t1" cols="30" rows="10"></textarea></p>
+
+    <script>
+    var aInput = document.getElementsByTagName("input");
+
+    var oT = document.getElementById("t1");
+
+
+    window.onunload = function(){//关闭窗口
+        if( aInput[0].value ){
+            window.localStorage.setItem('name',aInput[0].value);
+        }
+        for(var i = 1; i < aInput.length; i++){
+            if(aInput[i].checked == true){
+                window.localStorage.setItem('sex',aInput[i].value);
+            }
+        }
+
+        if( oT.value ){
+            window.localStorage.setItem('ta',oT.value);
+        }
+
+    };
+
+
+    if( window.localStorage.getItem('name') ){
+        aInput[0].value = window.localStorage.getItem('name');
+    }
+    if( window.localStorage.getItem('sex') ){
+        for(var i = 1; i < aInput.length; i++){
+            if(aInput[i].value == window.localStorage.getItem('sex') ){
+                aInput[i].checked = true;
+            }
+        }
+    }
+    if( window.localStorage.getItem('ta') ){
+        oT.value = window.localStorage.getItem('ta');
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="设置">
+    <input type="button" value="获取">
+    <input type="button" value="删除">
+    <input type="text">
+
+    <script>
+    var aInput = document.getElementsByTagName("input");
+
+    //设置
+    aInput[0].onclick = function(){
+
+        window.localStorage.setItem('name',aInput[3].value);
+
+    };
+    //获取
+    aInput[1].onclick = function(){
+
+        //console.log( window.sessionStorage.getItem('name') );
+        console.log( window.localStorage.getItem('name') );
+
+    };
+    //删除
+    aInput[2].onclick = function(){
+
+        window.localStorage.removeItem('name');
+    };
+
+    //当前页面的事件不会触发，共享的其他页面会触发，服务器环境下测试
+    window.addEventListener('storage', function(ev){
+        console.log(ev.key);
+    },false);
+    </script>
+</body>
+</html>
