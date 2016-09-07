@@ -121,14 +121,14 @@ VQuery.prototype.css = function(attr,value){
 //2:fn1
 //3:fn2
 VQuery.prototype.toggle = function(){
-    var _arguments = arguments;
+    var _arguments = arguments;//几个函数
     for(var i = 0;i < this.elements.length;i++){
-       addToggle(this.elements[i]);
+       addToggle(this.elements[i]);//每一个元素
     }
     function addToggle(obj){
        var count = 0;
        myAddEvent(obj,"click",function(){//注意函数中的arguments
-           _arguments[count++ % _arguments.length].call(obj);//注意
+           _arguments[count++ % _arguments.length].call(obj);//注意，分别执行几个函数
        });
     }
 };

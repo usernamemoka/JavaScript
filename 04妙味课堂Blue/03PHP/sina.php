@@ -54,7 +54,7 @@
         }
         oBtn.onclick = function(){
             var url = "sina_post.php?act=add&content=" + oTxt.value;
-            ajax(url,function(str){
+            ajax(url,function(str){//读
 
             });
             var oLi = document.createElement("div");
